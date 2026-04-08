@@ -1,72 +1,313 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Playbook Estratégico: IA Aplicada a Negócios</title>
-    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;500;600;700;800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet"
+        href="https://fonts.googleapis.com/css2?family=Material+Symbols+Outlined:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="style.css">
     <style>
         /* Semana de Ativação */
-        .activation-section { padding: 4rem 0 2rem; }
-        .activation-section .section-header { margin-bottom: 2.5rem; }
-        .day-list { display: flex; flex-direction: column; gap: 1rem; }
-        .day-item { background: var(--bg-card); border: 1px solid var(--border-color); border-radius: 12px; padding: 1.5rem 2rem; display: flex; gap: 2rem; align-items: flex-start; }
-        .day-marker { flex: 0 0 90px; font-weight: 700; font-size: 0.75rem; color: var(--brb-blue-dark); text-transform: uppercase; padding-top: 0.2rem; letter-spacing: 0.5px; }
-        .day-content h4 { font-size: 1rem; color: var(--neut-900); margin-bottom: 0.25rem; font-weight: 700; }
-        .day-content p { font-size: 0.9rem; color: var(--neut-600); margin: 0; line-height: 1.5; }
+        .activation-section {
+            padding: 4rem 0 2rem;
+        }
+
+        .activation-section .section-header {
+            margin-bottom: 2.5rem;
+        }
+
+        .day-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+        }
+
+        .day-item {
+            background: var(--bg-card);
+            border: 1px solid var(--border-color);
+            border-radius: 12px;
+            padding: 1.5rem 2rem;
+            display: flex;
+            gap: 2rem;
+            align-items: flex-start;
+        }
+
+        .day-marker {
+            flex: 0 0 90px;
+            font-weight: 700;
+            font-size: 0.75rem;
+            color: var(--brb-blue-dark);
+            text-transform: uppercase;
+            padding-top: 0.2rem;
+            letter-spacing: 0.5px;
+        }
+
+        .day-content h4 {
+            font-size: 1rem;
+            color: var(--neut-900);
+            margin-bottom: 0.25rem;
+            font-weight: 700;
+        }
+
+        .day-content p {
+            font-size: 0.9rem;
+            color: var(--neut-600);
+            margin: 0;
+            line-height: 1.5;
+        }
 
         /* Tabela de dados sensíveis */
-        .data-table { width: 100%; border-collapse: collapse; font-size: 0.9rem; border-radius: 12px; overflow: hidden; }
-        .data-table th { background: var(--neut-900); color: white; padding: 1rem; text-align: left; font-weight: 600; }
-        .data-table td { padding: 0.85rem 1rem; border-bottom: 1px solid var(--neut-200); }
-        .data-table tr:last-child td { border-bottom: none; }
-        .data-table .yes { color: var(--success); font-weight: 600; }
-        .data-table .no { color: var(--danger); font-weight: 600; }
-        .data-table tr:nth-child(even) td { background: var(--neut-50); }
+        .data-table {
+            width: 100%;
+            border-collapse: collapse;
+            font-size: 0.9rem;
+            border-radius: 12px;
+            overflow: hidden;
+        }
+
+        .data-table th {
+            background: var(--neut-900);
+            color: white;
+            padding: 1rem;
+            text-align: left;
+            font-weight: 600;
+        }
+
+        .data-table td {
+            padding: 0.85rem 1rem;
+            border-bottom: 1px solid var(--neut-200);
+        }
+
+        .data-table tr:last-child td {
+            border-bottom: none;
+        }
+
+        .data-table .yes {
+            color: var(--success);
+            font-weight: 600;
+        }
+
+        .data-table .no {
+            color: var(--danger);
+            font-weight: 600;
+        }
+
+        .data-table tr:nth-child(even) td {
+            background: var(--neut-50);
+        }
 
         /* Régua de maturidade */
-        .maturity-row { display: flex; align-items: center; gap: 1.5rem; padding: 1.25rem 1.5rem; border-bottom: 1px solid var(--neut-100); }
-        .maturity-row:last-child { border-bottom: none; }
-        .maturity-level { flex: 0 0 50px; font-size: 2rem; font-weight: 800; color: var(--neut-200); text-align: center; }
-        .maturity-content h4 { font-size: 1rem; color: var(--neut-900); font-weight: 700; margin-bottom: 0.2rem; }
-        .maturity-content p { font-size: 0.9rem; color: var(--neut-600); margin: 0; }
-        .maturity-row.current .maturity-level { color: var(--brb-blue-light); }
-        .maturity-row.current { background: rgba(0,174,239,0.03); border-left: 3px solid var(--brb-blue-light); padding-left: calc(1.5rem - 3px); }
+        .maturity-row {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            padding: 1.25rem 1.5rem;
+            border-bottom: 1px solid var(--neut-100);
+        }
+
+        .maturity-row:last-child {
+            border-bottom: none;
+        }
+
+        .maturity-level {
+            flex: 0 0 50px;
+            font-size: 2rem;
+            font-weight: 800;
+            color: var(--neut-200);
+            text-align: center;
+        }
+
+        .maturity-content h4 {
+            font-size: 1rem;
+            color: var(--neut-900);
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .maturity-content p {
+            font-size: 0.9rem;
+            color: var(--neut-600);
+            margin: 0;
+        }
+
+        .maturity-row.current .maturity-level {
+            color: var(--brb-blue-light);
+        }
+
+        .maturity-row.current {
+            background: rgba(0, 174, 239, 0.03);
+            border-left: 3px solid var(--brb-blue-light);
+            padding-left: calc(1.5rem - 3px);
+        }
 
         /* Card de ferramenta — formato padronizado */
-        .tool-card-field { margin-bottom: 0.75rem; font-size: 0.9rem; }
-        .tool-card-field:last-child { margin-bottom: 0; }
-        .tool-card-field .field-label { font-weight: 700; color: var(--brb-blue-dark); font-size: 0.7rem; text-transform: uppercase; letter-spacing: 0.5px; display: block; margin-bottom: 0.2rem; }
-        .tool-card-field p { color: #334155; margin: 0; line-height: 1.4; }
-        .tool-card-field .example { font-style: italic; background: var(--neut-50); padding: 0.5rem 0.75rem; border-radius: 6px; font-size: 0.85rem; margin-top: 0.25rem; color: var(--neut-600); border-left: 2px solid var(--brb-blue-light); }
+        .tool-card-field {
+            margin-bottom: 0.75rem;
+            font-size: 0.9rem;
+        }
+
+        .tool-card-field:last-child {
+            margin-bottom: 0;
+        }
+
+        .tool-card-field .field-label {
+            font-weight: 700;
+            color: var(--brb-blue-dark);
+            font-size: 0.7rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            display: block;
+            margin-bottom: 0.2rem;
+        }
+
+        .tool-card-field p {
+            color: #334155;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .tool-card-field .example {
+            font-style: italic;
+            background: var(--neut-50);
+            padding: 0.5rem 0.75rem;
+            border-radius: 6px;
+            font-size: 0.85rem;
+            margin-top: 0.25rem;
+            color: var(--neut-600);
+            border-left: 2px solid var(--brb-blue-light);
+        }
 
         /* Checklist de validação */
-        .validate-item { display: flex; align-items: flex-start; gap: 0.75rem; padding: 1rem 1.25rem; border: 1px solid var(--neut-200); border-radius: 8px; margin-bottom: 0.5rem; background: white; }
-        .validate-item .material-symbols-outlined { color: var(--neut-300); font-size: 1.3rem; flex-shrink: 0; }
-        .validate-item p { margin: 0; font-size: 0.95rem; color: var(--neut-800); }
+        .validate-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.75rem;
+            padding: 1rem 1.25rem;
+            border: 1px solid var(--neut-200);
+            border-radius: 8px;
+            margin-bottom: 0.5rem;
+            background: white;
+        }
+
+        .validate-item .material-symbols-outlined {
+            color: var(--neut-300);
+            font-size: 1.3rem;
+            flex-shrink: 0;
+        }
+
+        .validate-item p {
+            margin: 0;
+            font-size: 0.95rem;
+            color: var(--neut-800);
+        }
 
         /* Stack Mental */
-        .stack-mental { display: flex; flex-wrap: wrap; gap: 1rem; margin-top: 1rem; }
-        .stack-step { flex: 1; min-width: 150px; background: #1e293b; border: 2px solid #334155; padding: 1.5rem 1rem; text-align: center; border-radius: 12px; font-weight: bold; color: var(--brb-blue-light); text-transform: uppercase; }
-        .stack-step.highlight { background: var(--brb-blue-light); color: #0f172a; border-color: var(--brb-blue-light); }
-        .stack-step .stack-icon { font-size: 2rem; display: block; margin-bottom: 0.5rem; }
-        .stack-step .stack-desc { font-size: 0.7rem; font-weight: 400; margin-top: 0.5rem; display: block; color: #94a3b8; text-transform: none; }
-        .stack-step.highlight .stack-desc { color: #0f172a; font-weight: 600; }
+        .stack-mental {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .stack-step {
+            flex: 1;
+            min-width: 150px;
+            background: #1e293b;
+            border: 2px solid #334155;
+            padding: 1.5rem 1rem;
+            text-align: center;
+            border-radius: 12px;
+            font-weight: bold;
+            color: var(--brb-blue-light);
+            text-transform: uppercase;
+        }
+
+        .stack-step.highlight {
+            background: var(--brb-blue-light);
+            color: #0f172a;
+            border-color: var(--brb-blue-light);
+        }
+
+        .stack-step .stack-icon {
+            font-size: 2rem;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .stack-step .stack-desc {
+            font-size: 0.7rem;
+            font-weight: 400;
+            margin-top: 0.5rem;
+            display: block;
+            color: #94a3b8;
+            text-transform: none;
+        }
+
+        .stack-step.highlight .stack-desc {
+            color: #0f172a;
+            font-weight: 600;
+        }
 
         /* Pipeline timing badge */
-        .pipeline-time { display: flex; flex-wrap: wrap; gap: 1.5rem; padding: 1rem 2rem; background: var(--neut-50); border-top: 1px solid var(--border-color); font-size: 0.85rem; align-items: center; }
-        .time-before { color: var(--danger); font-weight: 700; }
-        .time-after { color: var(--success); font-weight: 700; }
-        .time-sep { color: var(--neut-300); }
+        .pipeline-time {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            padding: 1rem 2rem;
+            background: var(--neut-50);
+            border-top: 1px solid var(--border-color);
+            font-size: 0.85rem;
+            align-items: center;
+        }
+
+        .time-before {
+            color: var(--danger);
+            font-weight: 700;
+        }
+
+        .time-after {
+            color: var(--success);
+            font-weight: 700;
+        }
+
+        .time-sep {
+            color: var(--neut-300);
+        }
 
         /* Erros comuns de prompt */
-        .error-item { display: flex; gap: 1rem; padding: 1rem 1.25rem; background: white; border: 1px solid var(--neut-200); border-left: 4px solid var(--danger); border-radius: 8px; margin-bottom: 0.75rem; }
-        .error-item .error-label { font-size: 0.75rem; text-transform: uppercase; letter-spacing: 0.5px; font-weight: 700; color: var(--danger); display: block; margin-bottom: 0.25rem; }
-        .error-item p { font-size: 0.9rem; color: var(--neut-600); margin: 0; }
+        .error-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 1.25rem;
+            background: white;
+            border: 1px solid var(--neut-200);
+            border-left: 4px solid var(--danger);
+            border-radius: 8px;
+            margin-bottom: 0.75rem;
+        }
+
+        .error-item .error-label {
+            font-size: 0.75rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            font-weight: 700;
+            color: var(--danger);
+            display: block;
+            margin-bottom: 0.25rem;
+        }
+
+        .error-item p {
+            font-size: 0.9rem;
+            color: var(--neut-600);
+            margin: 0;
+        }
     </style>
 </head>
+
 <body>
 
     <button class="menu-toggle" type="button" aria-controls="primary-sidebar" aria-expanded="false">
@@ -77,8 +318,10 @@
 
     <nav class="sidebar" id="primary-sidebar" aria-label="Navegacao principal">
         <div class="sidebar-header">
-            <div class="brand"><span class="material-symbols-outlined">hub</span><span class="brand-label">Playbook IA</span></div>
-            <button class="sidebar-collapse" type="button" aria-label="Recolher menu" aria-expanded="true" title="Recolher menu">
+            <div class="brand"><span class="material-symbols-outlined">hub</span><span class="brand-label">Playbook
+                    IA</span></div>
+            <button class="sidebar-collapse" type="button" aria-label="Recolher menu" aria-expanded="true"
+                title="Recolher menu">
                 <span class="material-symbols-outlined">menu_open</span>
             </button>
             <button class="sidebar-close" type="button" aria-label="Fechar menu">
@@ -86,18 +329,28 @@
             </button>
         </div>
         <ul class="nav-links">
-            <li><a href="#abertura" class="active" title="Abertura"><span class="material-symbols-outlined">play_circle</span><span class="nav-label">Abertura</span></a></li>
-            <li><a href="#case" title="Estudo de Caso"><span class="material-symbols-outlined">workspace_premium</span><span class="nav-label">Estudo de Caso</span></a></li>
+            <li><a href="#abertura" class="active" title="Abertura"><span
+                        class="material-symbols-outlined">play_circle</span><span class="nav-label">Abertura</span></a>
+            </li>
+            <li><a href="#case" title="Estudo de Caso"><span
+                        class="material-symbols-outlined">workspace_premium</span><span class="nav-label">Estudo de
+                        Caso</span></a></li>
             <li><a href="#metodo"><span class="material-symbols-outlined">sync_alt</span> Por que Método?</a></li>
-            <li><a href="#arquitetura"><span class="material-symbols-outlined">account_tree</span> Framework de Decisão</a></li>
+            <li><a href="#arquitetura"><span class="material-symbols-outlined">account_tree</span> Framework de
+                    Decisão</a></li>
             <li><a href="#mapa"><span class="material-symbols-outlined">map</span> Stack de Ferramentas</a></li>
-            <li><a href="#recursos"><span class="material-symbols-outlined">build</span> Capacidades das Plataformas</a></li>
+            <li><a href="#recursos"><span class="material-symbols-outlined">build</span> Capacidades das Plataformas</a>
+            </li>
             <li><a href="#modelos"><span class="material-symbols-outlined">toll</span> Modelos e Custos</a></li>
             <li><a href="#fluxos"><span class="material-symbols-outlined">mediation</span> Pipelines Práticos</a></li>
-            <li><a href="#validacao"><span class="material-symbols-outlined">fact_check</span> Contexto e Validação</a></li>
-            <li><a href="#prompt-eng"><span class="material-symbols-outlined">code_blocks</span> Briefing para a IA</a></li>
-            <li><a href="#spec-driven"><span class="material-symbols-outlined">rule</span> Especificação Estruturada</a></li>
-            <li><a href="#biblioteca"><span class="material-symbols-outlined">library_books</span> Biblioteca de Prompts</a></li>
+            <li><a href="#validacao"><span class="material-symbols-outlined">fact_check</span> Contexto e Validação</a>
+            </li>
+            <li><a href="#prompt-eng"><span class="material-symbols-outlined">code_blocks</span> Briefing para a IA</a>
+            </li>
+            <li><a href="#spec-driven"><span class="material-symbols-outlined">rule</span> Especificação Estruturada</a>
+            </li>
+            <li><a href="#biblioteca"><span class="material-symbols-outlined">library_books</span> Biblioteca de
+                    Prompts</a></li>
             <li><a href="#skills"><span class="material-symbols-outlined">memory</span> Agentes e MCP</a></li>
             <li><a href="#governanca"><span class="material-symbols-outlined">gavel</span> Governança e Dados</a></li>
             <li><a href="#playbook"><span class="material-symbols-outlined">flag</span> Semana de Ativação</a></li>
@@ -111,15 +364,22 @@
             <div class="hero-manifesto">
                 <div class="hero-tags">
                     <span class="tag blue" style="border-color:#00AEEF; color:#00AEEF;">Workshop Estratégico</span>
-                    <span class="tag dark" style="background:rgba(255,255,255,0.1); color:#cbd5e1;">Para Gestores Seniores</span>
+                    <span class="tag dark" style="background:rgba(255,255,255,0.1); color:#cbd5e1;">SUPEC</span>
                 </div>
                 <div style="margin-top:2rem; border-left:4px solid var(--brb-blue-light); padding-left:1.5rem;">
-                    <h1>IA não é ferramenta de resposta.<br><span style="color:var(--brb-blue-light); font-weight:300;">É infraestrutura de trabalho.</span></h1>
-                    <p style="font-size:1.25rem; margin-bottom:0;">A diferença não está na ferramenta que você escolhe. Está em como você organiza o trabalho ao redor dela.</p>
+                    <h1>IA não é ferramenta de resposta.<br><span
+                            style="color:var(--brb-blue-light); font-weight:300;">É infraestrutura de trabalho.</span>
+                    </h1>
+                    <p style="font-size:1.25rem; margin-bottom:0;">A diferença não está na ferramenta que você escolhe.
+                        Está em como você organiza o trabalho ao redor dela.</p>
                 </div>
-                <div style="margin-top:2.5rem; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:1.5rem; max-width:750px;">
-                    <p style="font-size:1.05rem; color:#e2e8f0; font-style:italic; margin:0; line-height:1.6;">"Quantas vezes na última semana você pediu algo para a IA e precisou refazer porque o resultado estava errado ou incompleto?"</p>
-                    <p style="font-size:0.9rem; color:#94a3b8; margin:0.75rem 0 0 0;">Se a resposta for "mais de duas vezes", o problema não é a ferramenta. É o método.</p>
+                <div
+                    style="margin-top:2.5rem; background:rgba(255,255,255,0.05); border:1px solid rgba(255,255,255,0.15); border-radius:12px; padding:1.5rem; max-width:750px;">
+                    <p style="font-size:1.05rem; color:#e2e8f0; font-style:italic; margin:0; line-height:1.6;">"Quantas
+                        vezes na última semana você pediu algo para a IA e precisou refazer porque o resultado estava
+                        errado ou incompleto?"</p>
+                    <p style="font-size:0.9rem; color:#94a3b8; margin:0.75rem 0 0 0;">Se a resposta for "mais de duas
+                        vezes", o problema não é a ferramenta. É o método.</p>
                 </div>
             </div>
         </section>
@@ -128,45 +388,67 @@
         <section id="case">
             <div class="section-header">
                 <h2>O que funciona na prática</h2>
-                <p>Antes dos frameworks, um caso real. Veja como um gestor da corretora usou IA para construir um simulador de vendas B2B — e o que você pode replicar desta semana.</p>
+                <p>Antes dos frameworks, um caso real. A utilização da para construir um
+                    simulador de cenários para Corbans — e o que você pode replicar desta case.</p>
             </div>
             <div class="consulting-case">
                 <span class="case-badge">Estudo de Caso Real</span>
-                <h2 class="case-title">Simulador de Viabilidade para<br><strong>Rede de Correspondentes Bancários</strong></h2>
+                <h2 class="case-title">Simulador de Viabilidade para<br><strong>Rede de Correspondentes
+                        Bancários</strong></h2>
                 <div class="case-grid">
                     <div class="case-problem">
                         <h4>Situação</h4>
-                        <p style="margin-bottom:1.5rem;">A equipe precisava avaliar um novo modelo de vendas com margens agressivas e ativação gradual de parceiros. As planilhas existentes não simulavam os cenários com precisão suficiente. Uma análise completa levava dias.</p>
+                        <p style="margin-bottom:1.5rem;">Precisávamos avaliar um novo modelo de vendas com margens
+                            agressivas e ativação gradual de parceiros. As planilhas existentes não simulavam os
+                            cenários com precisão suficiente. Uma análise completa levaria dias.</p>
                         <h4>Resultado</h4>
-                        <p style="margin-bottom:2rem;">O simulador foi construído e validado em horas. A equipe testou 3 cenários na mesma tarde e apresentou para a diretoria no dia seguinte.</p>
+                        <p style="margin-bottom:2rem;">O simulador foi construído e validado em horas. Conseguimos
+                            testar os 3 cenários utilizando IA, com confiança para apresentar para a diretoria.</p>
                         <div class="case-lessons">
-                            <h4><span class="material-symbols-outlined">workspace_premium</span> O que qualquer gestor pode replicar</h4>
+                            <h4><span class="material-symbols-outlined">workspace_premium</span> O que qualquer gestor
+                                pode replicar</h4>
                             <ul>
-                                <li><span class="material-symbols-outlined">check_circle</span> <strong>Especifique a lógica antes de construir.</strong> O ChatGPT estruturou o modelo financeiro. O Antigravity construiu o simulador.</li>
-                                <li><span class="material-symbols-outlined">check_circle</span> <strong>Use uma ferramenta para auditar a outra.</strong> O Excel verificou o que o simulador web calculou.</li>
-                                <li><span class="material-symbols-outlined">check_circle</span> <strong>A decisão final ficou com o gestor.</strong> A IA acelerou o processo. A análise de viabilidade foi humana.</li>
-                                <li><span class="material-symbols-outlined">check_circle</span> <strong>Sem fila de TI para o protótipo.</strong> O resultado foi testável no mesmo dia da demanda.</li>
+                                <li><span class="material-symbols-outlined">check_circle</span> <strong>Especifique a
+                                        lógica antes de construir.</strong> O ChatGPT estruturou o modelo financeiro. O
+                                    Antigravity construiu o simulador.</li>
+                                <li><span class="material-symbols-outlined">check_circle</span> <strong>Use uma
+                                        ferramenta para auditar a outra.</strong> O Excel, gerado por IA, verificou o
+                                    que o simulador
+                                    web calculou.</li>
+                                <li><span class="material-symbols-outlined">check_circle</span> <strong>A decisão final
+                                        ficou com o gestor.</strong> A IA acelerou o processo. A análise de viabilidade
+                                    foi humana.</li>
+                                <li><span class="material-symbols-outlined">check_circle</span> <strong>Sem fila de TI
+                                        para o protótipo.</strong> O resultado foi testável no mesmo dia da demanda.
+                                </li>
                             </ul>
                         </div>
                     </div>
                     <div class="case-architecture">
-                        <h4 style="color:#94a3b8; font-size:0.85rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:1.5rem;">Abordagem: 4 etapas em sequência</h4>
+                        <h4
+                            style="color:#94a3b8; font-size:0.85rem; text-transform:uppercase; letter-spacing:1px; margin-bottom:1.5rem;">
+                            Abordagem: 4 etapas em sequência</h4>
                         <div class="architecture-timeline">
                             <div class="arch-step">
                                 <h5>1. Estruturar a lógica financeira</h5>
-                                <p>O ChatGPT absorveu as premissas — EBITDA, curva de ativação, comissões — e organizou a arquitetura de cálculo do simulador antes de qualquer linha de código.</p>
+                                <p>O ChatGPT absorveu as premissas — EBITDA, curva de ativação, comissões — e organizou
+                                    a arquitetura de cálculo do simulador antes de qualquer linha de código.</p>
                             </div>
                             <div class="arch-step">
                                 <h5>2. Construir o protótipo</h5>
-                                <p>O Antigravity transformou a lógica em um simulador web interativo. A equipe testou os cenários pelo browser, sem depender de TI.</p>
+                                <p>O Antigravity transformou a lógica em um simulador web interativo. Conseguimos testar
+                                    os
+                                    cenários pelo browser, sem depender de TI.</p>
                             </div>
                             <div class="arch-step">
                                 <h5>3. Auditar o código</h5>
-                                <p>O Claude revisou o código gerado. Verificou fórmulas e identificou inconsistências lógicas antes da apresentação à diretoria.</p>
+                                <p>O Claude revisou o código gerado. Verificou fórmulas e identificou inconsistências
+                                    lógicas antes da apresentação à diretoria.</p>
                             </div>
                             <div class="arch-step highlight">
                                 <h5>4. Validar nos dois formatos</h5>
-                                <p>As mesmas fórmulas foram exportadas para Excel. A equipe financeira conferiu os cálculos no ambiente que já dominava — e aprovou.</p>
+                                <p>As mesmas fórmulas foram exportadas para Excel. O time de performance conferiu os
+                                    cálculos no ambiente que já dominava — e aprovou.</p>
                             </div>
                         </div>
                     </div>
@@ -182,19 +464,36 @@
             </div>
             <div class="grid-2">
                 <div class="card" style="border-top:4px solid var(--danger);">
-                    <h3 style="color:var(--danger); margin-bottom:1rem;"><span class="material-symbols-outlined">sentiment_dissatisfied</span> Uso Descoordenado</h3>
+                    <h3 style="color:var(--danger); margin-bottom:1rem;"><span
+                            class="material-symbols-outlined">sentiment_dissatisfied</span> Uso Descoordenado</h3>
                     <ul class="checklist">
-                        <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span> <strong>Mesma ferramenta para tudo:</strong> ChatGPT para pesquisar dados de mercado, redigir contratos e fazer análises financeiras — sem separar o que cada modelo faz melhor.</li>
-                        <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span> <strong>Pedido sem contexto:</strong> "Escreva um relatório" — sem dizer para quem, sobre o quê ou em qual tom e formato.</li>
-                        <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span> <strong>Resultado sem verificação:</strong> Números e citações regulatórias usados diretamente, sem checar a fonte original.</li>
+                        <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span>
+                            <strong>Mesma ferramenta para tudo:</strong> ChatGPT para pesquisar dados de mercado,
+                            redigir contratos e fazer análises financeiras — sem separar o que cada modelo faz melhor.
+                        </li>
+                        <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span>
+                            <strong>Pedido sem contexto:</strong> "Escreva um relatório" — sem dizer para quem, sobre o
+                            quê ou em qual tom e formato.
+                        </li>
+                        <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span>
+                            <strong>Resultado sem verificação:</strong> Números e citações regulatórias usados
+                            diretamente, sem checar a fonte original.
+                        </li>
                     </ul>
                 </div>
                 <div class="card" style="border-top:4px solid var(--success);">
-                    <h3 style="color:var(--success); margin-bottom:1rem;"><span class="material-symbols-outlined">verified_user</span> Uso Estruturado</h3>
+                    <h3 style="color:var(--success); margin-bottom:1rem;"><span
+                            class="material-symbols-outlined">verified_user</span> Uso Estruturado</h3>
                     <ul class="checklist">
-                        <li><span class="material-symbols-outlined">check</span> <strong>Ferramenta certa para cada tarefa:</strong> Perplexity para dados externos com fonte verificável. ChatGPT para estruturar. Copilot para dados internos sigilosos.</li>
-                        <li><span class="material-symbols-outlined">check</span> <strong>Briefing antes de qualquer prompt:</strong> Papel + Contexto + Tarefa + Formato. Resultados previsíveis que o time pode reutilizar.</li>
-                        <li><span class="material-symbols-outlined">check</span> <strong>Validação como etapa do processo:</strong> A IA produz; o gestor aprova. Números críticos são verificados antes de sair da equipe.</li>
+                        <li><span class="material-symbols-outlined">check</span> <strong>Ferramenta certa para cada
+                                tarefa:</strong> Perplexity para dados externos com fonte verificável. ChatGPT para
+                            estruturar. Copilot para dados internos sigilosos.</li>
+                        <li><span class="material-symbols-outlined">check</span> <strong>Briefing antes de qualquer
+                                prompt:</strong> Papel + Contexto + Tarefa + Formato. Resultados previsíveis que o time
+                            pode reutilizar.</li>
+                        <li><span class="material-symbols-outlined">check</span> <strong>Validação como etapa do
+                                processo:</strong> A IA produz; o gestor aprova. Números críticos são verificados antes
+                            de sair da equipe.</li>
                     </ul>
                 </div>
             </div>
@@ -217,17 +516,20 @@
                         <div class="decision-card">
                             <span class="tool-badge">Perplexity / NotebookLM</span>
                             <strong>Pesquisa com fonte verificável</strong>
-                            <p>Dados externos com origem rastreável? → Perplexity para a web. NotebookLM para acervo documental interno.</p>
+                            <p>Dados externos com origem rastreável? → Perplexity para a web. NotebookLM para acervo
+                                documental interno.</p>
                         </div>
                         <div class="decision-card">
                             <span class="tool-badge">ChatGPT / Claude</span>
                             <strong>Estruturação e escrita</strong>
-                            <p>Organizar ideias, analisar contrato ou escrever documento? → ChatGPT para estrutura. Claude para revisão e precisão.</p>
+                            <p>Organizar ideias, analisar contrato ou escrever documento? → ChatGPT para estrutura.
+                                Claude para revisão e precisão.</p>
                         </div>
                         <div class="decision-card">
                             <span class="tool-badge">Lovable / Bolt / Stitch</span>
                             <strong>Protótipo navegável</strong>
-                            <p>Transformar uma especificação em tela sem fila de TI? → Lovable, Bolt ou Stitch geram interfaces clicáveis em horas.</p>
+                            <p>Transformar uma especificação em tela sem fila de TI? → Lovable, Bolt ou Stitch geram
+                                interfaces clicáveis em horas.</p>
                         </div>
                     </div>
                 </div>
@@ -241,17 +543,22 @@
                         <div class="decision-card" style="border-left:3px solid var(--danger);">
                             <span class="tool-badge">Somente Copilot M365</span>
                             <strong>Dado sensível</strong>
-                            <p>Balanços, contratos com NDA, comissões, dados de clientes, estratégias de produto? → Somente Copilot corporativo no M365 fechado.</p>
+                            <p>Balanços, contratos com NDA, comissões, dados de clientes, estratégias de produto? →
+                                Somente Copilot corporativo no M365 fechado.</p>
                         </div>
                         <div class="decision-card" style="border-left:3px solid var(--success);">
                             <span class="tool-badge">Qualquer ferramenta aberta</span>
                             <strong>Dado público ou de comunicação</strong>
-                            <p>Benchmarks de mercado, conteúdo de marketing, tendências do setor? → Qualquer ferramenta aberta funciona.</p>
+                            <p>Benchmarks de mercado, conteúdo de marketing, tendências do setor? → Qualquer ferramenta
+                                aberta funciona.</p>
                         </div>
-                        <div class="decision-card" style="background:rgba(239,68,68,0.04); border:1px dashed var(--danger);">
-                            <span class="tool-badge" style="background:#fee2e2; color:var(--danger);">Regra prática</span>
+                        <div class="decision-card"
+                            style="background:rgba(239,68,68,0.04); border:1px dashed var(--danger);">
+                            <span class="tool-badge" style="background:#fee2e2; color:var(--danger);">Regra
+                                prática</span>
                             <strong>A pergunta que você deve fazer sempre</strong>
-                            <p>"Se esse dado não pode sair do meu e-mail corporativo, ele não pode entrar em uma IA aberta."</p>
+                            <p>"Se esse dado não pode sair do meu e-mail corporativo, ele não pode entrar em uma IA
+                                aberta."</p>
                         </div>
                     </div>
                 </div>
@@ -263,14 +570,18 @@
                     </div>
                     <div class="decision-options">
                         <div class="decision-card">
-                            <span class="tool-badge" style="background:#e0f2fe; color:#0369a1;">Modelos Leves (Flash, Haiku, Mini)</span>
+                            <span class="tool-badge" style="background:#e0f2fe; color:#0369a1;">Modelos Leves (Flash,
+                                Haiku, Mini)</span>
                             <strong>Volume alto, tarefa repetitiva e clara</strong>
-                            <p>Triagem de e-mails em lote, sumarização de relatórios, classificação de tickets. Mais rápido e mais barato.</p>
+                            <p>Triagem de e-mails em lote, sumarização de relatórios, classificação de tickets. Mais
+                                rápido e mais barato.</p>
                         </div>
                         <div class="decision-card">
-                            <span class="tool-badge" style="background:#fef3c7; color:#b45309;">Modelos Robustos (Opus, Pro, o3)</span>
+                            <span class="tool-badge" style="background:#fef3c7; color:#b45309;">Modelos Robustos (Opus,
+                                Pro, o3)</span>
                             <strong>Análise crítica e decisão de impacto</strong>
-                            <p>Revisão de contrato complexo, simulação de ROI, análise jurídica regulatória (SUSEP). Vale o custo maior.</p>
+                            <p>Revisão de contrato complexo, simulação de ROI, análise jurídica regulatória (SUSEP).
+                                Vale o custo maior.</p>
                         </div>
                     </div>
                 </div>
@@ -284,17 +595,20 @@
                         <div class="decision-card">
                             <span class="tool-badge">Power Automate</span>
                             <strong>Aprovações hierárquicas no M365</strong>
-                            <p>Já usa Microsoft 365 e precisa de aprovações formais com rastreabilidade? → Integra Outlook, Teams e SharePoint.</p>
+                            <p>Já usa Microsoft 365 e precisa de aprovações formais com rastreabilidade? → Integra
+                                Outlook, Teams e SharePoint.</p>
                         </div>
                         <div class="decision-card">
                             <span class="tool-badge">Make</span>
                             <strong>Integração visual entre apps</strong>
-                            <p>Conectar CRM, planilha e WhatsApp de forma rápida e visual, sem código? → Make para fluxos ágeis.</p>
+                            <p>Conectar CRM, planilha e WhatsApp de forma rápida e visual, sem código? → Make para
+                                fluxos ágeis.</p>
                         </div>
                         <div class="decision-card">
                             <span class="tool-badge">n8n</span>
                             <strong>Integração técnica avançada</strong>
-                            <p>Conectar APIs, bancos de dados e modelos de IA com lógica personalizada? → n8n para arquitetura flexível.</p>
+                            <p>Conectar APIs, bancos de dados e modelos de IA com lógica personalizada? → n8n para
+                                arquitetura flexível.</p>
                         </div>
                     </div>
                 </div>
@@ -305,75 +619,161 @@
         <section id="mapa">
             <div class="section-header">
                 <h2>Stack de Ferramentas</h2>
-                <p>Dois níveis de adoção. Domine o Nível 1 antes de avançar. O Nível 1 cobre 80% das necessidades do dia a dia.</p>
+                <p>O conjunto de plataformas para resolver problemas organizacionais documentado para toda a equipe. Do chat rotineiro a agentes autônomos.</p>
             </div>
 
-            <div class="section-subheader">
-                <h3>Nível 1 — Stack Central (todo gestor deve dominar)</h3>
-                <p>Cinco ferramentas que resolvem a maioria dos problemas cotidianos da equipe.</p>
-            </div>
             <div class="grid-3" style="margin-bottom:3rem;">
                 <div class="card">
-                    <div class="card-title"><h3 style="color:var(--brb-blue-dark);">ChatGPT · Claude · Gemini</h3></div>
-                    <div class="tool-card-field"><span class="field-label">Quando usar</span><p>Estruture relatórios, analise documentos, escreva apresentações e revise contratos.</p></div>
-                    <div class="tool-card-field"><span class="field-label">Não usar quando</span><p>Precisar de dados de mercado em tempo real — esses modelos não buscam na web por padrão.</p></div>
-                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span><div class="example">"Revise esse contrato de parceria e aponte cláusulas que conflitam com a regulação SUSEP vigente."</div></div>
+                    <div class="card-title">
+                        <h3 style="color:var(--brb-blue-dark);">ChatGPT · Claude · Gemini</h3>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Quando usar</span>
+                        <p>Estruture relatórios, analise documentos, escreva apresentações e revise contratos.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Não usar quando</span>
+                        <p>Precisar de dados de mercado em tempo real — esses modelos não buscam na web por padrão.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span>
+                        <div class="example">"Revise esse contrato de parceria e aponte cláusulas que conflitam com a
+                            regulação SUSEP vigente."</div>
+                    </div>
                 </div>
                 <div class="card">
-                    <div class="card-title"><h3 style="color:var(--brb-blue-dark);">Perplexity</h3></div>
-                    <div class="tool-card-field"><span class="field-label">Quando usar</span><p>Pesquise benchmarks de mercado, regulações e dados externos com fontes verificáveis e links citados.</p></div>
-                    <div class="tool-card-field"><span class="field-label">Não usar quando</span><p>O dado for interno ou sigiloso — use o Copilot M365 para isso.</p></div>
-                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span><div class="example">"Quais mudanças nas regras de capitalização a SUSEP publicou nos últimos 6 meses?"</div></div>
+                    <div class="card-title">
+                        <h3 style="color:var(--brb-blue-dark);">Perplexity</h3>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Quando usar</span>
+                        <p>Pesquise benchmarks de mercado, regulações e dados externos com fontes verificáveis e links
+                            citados.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Não usar quando</span>
+                        <p>O dado for interno ou sigiloso — use o Copilot M365 para isso.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span>
+                        <div class="example">"Quais mudanças nas regras de capitalização a SUSEP publicou nos últimos 6
+                            meses?"</div>
+                    </div>
                 </div>
                 <div class="card">
-                    <div class="card-title"><h3 style="color:var(--brb-blue-dark);">Copilot M365</h3></div>
-                    <div class="tool-card-field"><span class="field-label">Quando usar</span><p>Trabalhe com balanços, DREs, contratos com NDA e dados de clientes — sem risco de vazamento externo.</p></div>
-                    <div class="tool-card-field"><span class="field-label">Não usar quando</span><p>Precisar de dados externos — o Copilot só acessa o ambiente fechado M365 da organização.</p></div>
-                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span><div class="example">"Resuma as últimas 5 atas do comitê de produto e extraia decisões com responsável e prazo."</div></div>
+                    <div class="card-title">
+                        <h3 style="color:var(--brb-blue-dark);">Copilot M365</h3>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Quando usar</span>
+                        <p>Trabalhe com balanços, DREs, contratos com NDA e dados de clientes — sem risco de vazamento
+                            externo.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Não usar quando</span>
+                        <p>Precisar de dados externos — o Copilot só acessa o ambiente fechado M365 da organização.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span>
+                        <div class="example">"Resuma as últimas 5 atas do comitê de produto e extraia decisões com
+                            responsável e prazo."</div>
+                    </div>
                 </div>
                 <div class="card">
-                    <div class="card-title"><h3 style="color:var(--brb-blue-dark);">Lovable · Stitch</h3></div>
-                    <div class="tool-card-field"><span class="field-label">Quando usar</span><p>Transforme uma especificação em protótipo navegável para testar com stakeholders sem depender de TI.</p></div>
-                    <div class="tool-card-field"><span class="field-label">Não usar quando</span><p>A lógica de negócio ainda não está definida — primeiro especifique, depois construa.</p></div>
-                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span><div class="example">"Crie um painel de metas de produção por corban, com filtros por mês e região."</div></div>
+                    <div class="card-title">
+                        <h3 style="color:var(--brb-blue-dark);">Lovable · Stitch</h3>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Quando usar</span>
+                        <p>Transforme uma especificação em protótipo navegável para testar com stakeholders sem depender
+                            de TI.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Não usar quando</span>
+                        <p>A lógica de negócio ainda não está definida — primeiro especifique, depois construa.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span>
+                        <div class="example">"Crie um painel de metas de produção por corban, com filtros por mês e
+                            região."</div>
+                    </div>
                 </div>
                 <div class="card">
-                    <div class="card-title"><h3 style="color:var(--brb-blue-dark);">n8n · Make</h3></div>
-                    <div class="tool-card-field"><span class="field-label">Quando usar</span><p>Automatize fluxos recorrentes que envolvem múltiplas fontes de dados, APIs e processamento com IA.</p></div>
-                    <div class="tool-card-field"><span class="field-label">Não usar quando</span><p>O processo ainda muda com frequência — automatizar um fluxo instável gera retrabalho constante.</p></div>
-                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span><div class="example">Formulário de prospectos → análise com IA → classificação por potencial → notificação ao gerente.</div></div>
+                    <div class="card-title">
+                        <h3 style="color:var(--brb-blue-dark);">n8n · Make</h3>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Quando usar</span>
+                        <p>Automatize fluxos recorrentes que envolvem múltiplas fontes de dados, APIs e processamento
+                            com IA.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Não usar quando</span>
+                        <p>O processo ainda muda com frequência — automatizar um fluxo instável gera retrabalho
+                            constante.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span>
+                        <div class="example">Formulário de prospectos → análise com IA → classificação por potencial →
+                            notificação ao gerente.</div>
+                    </div>
                 </div>
-            </div>
-
-            <div class="section-subheader">
-                <h3>Nível 2 — Stack Avançado (para times que dominam o Nível 1)</h3>
-                <p>Ferramentas especializadas. Use quando o Nível 1 não for suficiente para a complexidade da tarefa.</p>
-            </div>
-            <div class="grid-auto">
-                <div class="card-secondary">
-                    <h4>NotebookLM</h4>
-                    <p class="role">Análise de Acervo Documental</p>
-                    <p class="desc">Analise conjuntos grandes de documentos — regulações, relatórios, atas — e extraia respostas rastreadas nas fontes originais.</p>
+                <div class="card">
+                    <div class="card-title">
+                        <h3 style="color:var(--brb-blue-dark);">NotebookLM</h3>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Quando usar</span>
+                        <p>Analise conjuntos grandes de documentos — regulações, relatórios, atas — e extraia
+                            respostas rastreadas nas fontes originais.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Não usar quando</span>
+                        <p>Para pesquisa em bases abertas ou informações factuais gerais sem um documento base provido.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span>
+                        <div class="example">"Responda a estas questões usando exclusivamente as normas nestes 15 PDFs anexados."</div>
+                    </div>
                 </div>
-                <div class="card-secondary">
-                    <h4>Google AI Studio</h4>
-                    <p class="role">Parametrização de Assistentes</p>
-                    <p class="desc">Configure um assistente especializado com contexto fixo da empresa — como um validador de contratos SUSEP — para uso recorrente do time.</p>
+                <div class="card">
+                    <div class="card-title">
+                        <h3 style="color:var(--brb-blue-dark);">Google AI Studio</h3>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Quando usar</span>
+                        <p>Configure um assistente especializado com contexto fixo da empresa para uso recorrente do time.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Não usar quando</span>
+                        <p>A tarefa é solta e pontual, pois as ferramentas normais de chat generalistas já seriam suficientes no cenário.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span>
+                        <div class="example">"Criar um 'Validador de Contratos' já parametrizado com as regras-alvo."</div>
+                    </div>
                 </div>
-                <div class="card-secondary">
-                    <h4>Antigravity</h4>
-                    <p class="role">Orquestração com Acesso a Sistemas</p>
-                    <p class="desc">Automatize fluxos que precisam acessar sistemas internos (CRM, ERP, base de dados) com rastreabilidade e aprovação humana no processo.</p>
+                <div class="card">
+                    <div class="card-title">
+                        <h3 style="color:var(--brb-blue-dark);">Antigravity</h3>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Quando usar</span>
+                        <p>Automatize fluxos que precisam de agentes controlando sistemas locais e internos (CRM, ERP)
+                            em um loop de aprovações.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Não usar quando</span>
+                        <p>Você só precisa de texto e pesquisa leve, ou não tem um banco de dados/sistema acessível nativamente.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span>
+                        <div class="example">"Corrija os dados inconsistentes nesta carteira de clientes do ERP via API de forma cadenciada."</div>
+                    </div>
                 </div>
-                <div class="card-secondary">
-                    <h4>Manus</h4>
-                    <p class="role">Pesquisa Investigativa Contínua</p>
-                    <p class="desc">Execute pesquisas longas na web — mapear concorrentes de um nicho página a página — de forma autônoma e sem supervisão constante.</p>
+                <div class="card">
+                    <div class="card-title">
+                        <h3 style="color:var(--brb-blue-dark);">Manus</h3>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Quando usar</span>
+                        <p>Execute pesquisas investigativas e amplas de mercado na web de forma autônoma e autossuficiente.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Não usar quando</span>
+                        <p>O tempo de resposta precisar ser instantâneo ou a resposta não for demandar validações cíclicas de links.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span>
+                        <div class="example">"Navegue pelo site dos 5 concorrentes e crie uma planilha comparativa com seus preços online."</div>
+                    </div>
                 </div>
-                <div class="card-secondary">
-                    <h4>Power Automate</h4>
-                    <p class="role">Automação Corporativa M365</p>
-                    <p class="desc">Automatize aprovações formais e fluxos documentais dentro do Outlook, Teams e SharePoint com rastreabilidade hierárquica.</p>
+                <div class="card">
+                    <div class="card-title">
+                        <h3 style="color:var(--brb-blue-dark);">Power Automate</h3>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Quando usar</span>
+                        <p>Automatize aprovações formais corporativas e fluxos documentais dentro do Microsoft 365, Teams e SharePoint.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Não usar quando</span>
+                        <p>A organização ou os parceiros-alvo não estiverem englobados no ecossistema de nuvem e ferramentas da Microsoft.</p>
+                    </div>
+                    <div class="tool-card-field"><span class="field-label">Exemplo prático</span>
+                        <div class="example">E-mail chega -> Validação automática -> Envio para verificação no Teams -> Salva na nuvem.</div>
+                    </div>
                 </div>
             </div>
         </section>
@@ -391,25 +791,46 @@
                     <button class="tab-btn" data-tab="#tab-deep">Pesquisa Profunda</button>
                     <button class="tab-btn" data-tab="#tab-agents">Automação com Controle Humano</button>
                 </div>
-                <div class="tab-content active" id="tab-canvas" style="background:var(--bg-card); padding:2rem; border-radius:12px; border:1px solid var(--border-color);">
-                    <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;">Área de Artefatos Editáveis (Claude / ChatGPT)</h3>
-                    <p><strong>O que é:</strong> Uma tela lateral gerada pela IA, separada do chat. Serve para visualizar planilhas, diagramas ou documentos completos sem misturar com a conversa.</p>
-                    <p style="margin-top:0.75rem;"><strong>Uso prático:</strong> Edite diretamente um DRE gerado ou ajuste cláusulas de um contrato sem precisar copiar e colar para o Word. O documento cresce dentro da própria interface.</p>
+                <div class="tab-content active" id="tab-canvas"
+                    style="background:var(--bg-card); padding:2rem; border-radius:12px; border:1px solid var(--border-color);">
+                    <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;">Área de Artefatos Editáveis (Claude /
+                        ChatGPT)</h3>
+                    <p><strong>O que é:</strong> Uma tela lateral gerada pela IA, separada do chat. Serve para
+                        visualizar planilhas, diagramas ou documentos completos sem misturar com a conversa.</p>
+                    <p style="margin-top:0.75rem;"><strong>Uso prático:</strong> Edite diretamente um DRE gerado ou
+                        ajuste cláusulas de um contrato sem precisar copiar e colar para o Word. O documento cresce
+                        dentro da própria interface.</p>
                 </div>
-                <div class="tab-content" id="tab-studio" style="background:var(--bg-card); padding:2rem; border-radius:12px; border:1px solid var(--border-color);">
-                    <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;">System Instructions — Parametrização Restrita</h3>
-                    <p><strong>O que é:</strong> Um conjunto de regras que você programa na IA antes de qualquer uso. Ela segue essas regras em todas as interações seguintes, sem exceção.</p>
-                    <p style="margin-top:0.75rem;"><strong>Uso prático:</strong> Configure um validador de contratos que só aponta erros de prazo legais — sem tentar reescrever o texto nem oferecer sugestões editoriais. Comportamento previsível, resultado auditável.</p>
+                <div class="tab-content" id="tab-studio"
+                    style="background:var(--bg-card); padding:2rem; border-radius:12px; border:1px solid var(--border-color);">
+                    <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;">System Instructions — Parametrização
+                        Restrita</h3>
+                    <p><strong>O que é:</strong> Um conjunto de regras que você programa na IA antes de qualquer uso.
+                        Ela segue essas regras em todas as interações seguintes, sem exceção.</p>
+                    <p style="margin-top:0.75rem;"><strong>Uso prático:</strong> Configure um validador de contratos que
+                        só aponta erros de prazo legais — sem tentar reescrever o texto nem oferecer sugestões
+                        editoriais. Comportamento previsível, resultado auditável.</p>
                 </div>
-                <div class="tab-content" id="tab-deep" style="background:var(--bg-card); padding:2rem; border-radius:12px; border:1px solid var(--border-color);">
-                    <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;">Deep Research — Pesquisa Profunda e Cruzada</h3>
-                    <p><strong>O que é:</strong> Um motor de investigação. A IA lê PDFs longos, arquivos internos e dezenas de páginas ao mesmo tempo, entregando um relatório consolidado com links para cada fonte.</p>
-                    <p style="margin-top:0.75rem;"><strong>Uso prático:</strong> Cruzar normas da SUSEP recém publicadas com as regras do seu produto comercial interno em questão de minutos, com referências rastreáveis.</p>
+                <div class="tab-content" id="tab-deep"
+                    style="background:var(--bg-card); padding:2rem; border-radius:12px; border:1px solid var(--border-color);">
+                    <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;">Deep Research — Pesquisa Profunda e
+                        Cruzada</h3>
+                    <p><strong>O que é:</strong> Um motor de investigação. A IA lê PDFs longos, arquivos internos e
+                        dezenas de páginas ao mesmo tempo, entregando um relatório consolidado com links para cada
+                        fonte.</p>
+                    <p style="margin-top:0.75rem;"><strong>Uso prático:</strong> Cruzar normas da SUSEP recém publicadas
+                        com as regras do seu produto comercial interno em questão de minutos, com referências
+                        rastreáveis.</p>
                 </div>
-                <div class="tab-content" id="tab-agents" style="background:var(--bg-card); padding:2rem; border-radius:12px; border:1px solid var(--border-color);">
+                <div class="tab-content" id="tab-agents"
+                    style="background:var(--bg-card); padding:2rem; border-radius:12px; border:1px solid var(--border-color);">
                     <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;">Automação com Human-in-the-Loop</h3>
-                    <p><strong>O que é:</strong> A IA executa tarefas sequenciais sozinha, mas para e aguarda aprovação humana antes de qualquer ação irreversível — envio de e-mail em massa, atualização de banco de dados, publicação de documento oficial.</p>
-                    <p style="margin-top:0.75rem;"><strong>Uso prático:</strong> O agente processa 300 propostas comerciais, classifica por risco e monta os relatórios. O gestor revisa o resumo e clica em "Aprovar" para disparar. Escala sem abrir mão do controle.</p>
+                    <p><strong>O que é:</strong> A IA executa tarefas sequenciais sozinha, mas para e aguarda aprovação
+                        humana antes de qualquer ação irreversível — envio de e-mail em massa, atualização de banco de
+                        dados, publicação de documento oficial.</p>
+                    <p style="margin-top:0.75rem;"><strong>Uso prático:</strong> O agente processa 300 propostas
+                        comerciais, classifica por risco e monta os relatórios. O gestor revisa o resumo e clica em
+                        "Aprovar" para disparar. Escala sem abrir mão do controle.</p>
                 </div>
             </div>
         </section>
@@ -418,25 +839,43 @@
         <section id="modelos">
             <div class="section-header">
                 <h2>Modelos e Custos</h2>
-                <p>Use modelos ágeis para tarefas de volume. Use modelos robustos para deliberação crítica. A escolha certa reduz custo sem perder qualidade.</p>
+                <p>Use modelos ágeis para tarefas de volume. Use modelos robustos para deliberação crítica. A escolha
+                    certa reduz custo sem perder qualidade.</p>
             </div>
             <div class="grid-2">
                 <div class="card" style="border-left:4px solid var(--brb-blue-light);">
-                    <h3 style="margin-bottom:1rem;"><span class="material-symbols-outlined">speed</span> Modelos Ágeis (Flash, Haiku, Mini)</h3>
-                    <p style="margin-bottom:1rem;"><strong>Perfil:</strong> Rápidos e baratos. Ideais para operações repetitivas em lote onde o custo unitário importa.</p>
+                    <h3 style="margin-bottom:1rem;"><span class="material-symbols-outlined">speed</span> Modelos Ágeis
+                        (Flash, Haiku, Mini)</h3>
+                    <p style="margin-bottom:1rem;"><strong>Perfil:</strong> Rápidos e baratos. Ideais para operações
+                        repetitivas em lote onde o custo unitário importa.</p>
                     <ul class="checklist">
-                        <li><span class="material-symbols-outlined">check</span> <strong>Triagem de e-mails:</strong> Classificar e rotear mensagens de clientes por assunto para a fila certa automaticamente.</li>
-                        <li><span class="material-symbols-outlined">check</span> <strong>Tratamento em volume:</strong> Resumir e mapear tendências em um lote de 500 tickets de suporte mensais.</li>
-                        <li><span class="material-symbols-outlined">check</span> <strong>Transformação básica:</strong> Converter imagens de recibos diretamente em planilhas estruturadas.</li>
+                        <li><span class="material-symbols-outlined">check</span> <strong>Triagem de e-mails:</strong>
+                            Classificar e rotear mensagens de clientes por assunto para a fila certa automaticamente.
+                        </li>
+                        <li><span class="material-symbols-outlined">check</span> <strong>Tratamento em volume:</strong>
+                            Resumir e mapear tendências em um lote de 500 tickets de suporte mensais.</li>
+                        <li><span class="material-symbols-outlined">check</span> <strong>Transformação básica:</strong>
+                            Converter imagens de recibos diretamente em planilhas estruturadas.</li>
                     </ul>
                 </div>
                 <div class="card" style="background:#0f172a; color:white; border-left:4px solid #38bdf8;">
-                    <h3 style="margin-bottom:1rem; color:white;"><span class="material-symbols-outlined">psychology</span> Modelos Analíticos (Opus, Pro, o3)</h3>
-                    <p style="margin-bottom:1rem; color:#cbd5e1;"><strong>Perfil:</strong> Mais lentos e caros. Com raciocínio lógico avançado para análises de alta consequência.</p>
+                    <h3 style="margin-bottom:1rem; color:white;"><span
+                            class="material-symbols-outlined">psychology</span> Modelos Analíticos (Opus, Pro, o3)</h3>
+                    <p style="margin-bottom:1rem; color:#cbd5e1;"><strong>Perfil:</strong> Mais lentos e caros. Com
+                        raciocínio lógico avançado para análises de alta consequência.</p>
                     <ul class="checklist">
-                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">check</span> <strong>Revisão contratual fina:</strong> Buscar lacunas regulatórias complexas em contratos que exigem interpretação jurídica.</li>
-                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">check</span> <strong>Planejamento estratégico:</strong> Simular cenários de comissionamento e identificar o ponto de estrangulamento de margem.</li>
-                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">check</span> <strong>Auditoria de código crítico:</strong> Verificar a lógica de simuladores financeiros antes de apresentar para a diretoria.</li>
+                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">check</span>
+                            <strong>Revisão contratual fina:</strong> Buscar lacunas regulatórias complexas em contratos
+                            que exigem interpretação jurídica.
+                        </li>
+                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">check</span>
+                            <strong>Planejamento estratégico:</strong> Simular cenários de comissionamento e identificar
+                            o ponto de estrangulamento de margem.
+                        </li>
+                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">check</span>
+                            <strong>Auditoria de código crítico:</strong> Verificar a lógica de simuladores financeiros
+                            antes de apresentar para a diretoria.
+                        </li>
                     </ul>
                 </div>
             </div>
@@ -446,32 +885,40 @@
         <section id="fluxos">
             <div class="section-header">
                 <h2>Pipelines Práticos de Integração</h2>
-                <p>O maior ganho de produtividade está em encadear ferramentas em sequência, não em usar uma de forma isolada.</p>
+                <p>O maior ganho de produtividade está em encadear ferramentas em sequência, não em usar uma de forma
+                    isolada.</p>
             </div>
 
             <!-- Pipeline 1 -->
             <div class="pipeline-card">
                 <div class="pipeline-header">
                     <h4>Relatório Gerencial com Base Regulatória</h4>
-                    <span class="objective">Finalidade: Produzir uma defesa executiva apoiada em regulamentação real, com rastreabilidade de fontes.</span>
+                    <span class="objective">Finalidade: Produzir uma defesa executiva apoiada em regulamentação real,
+                        com rastreabilidade de fontes.</span>
                 </div>
                 <div class="pipeline-flow">
                     <div class="pipeline-step">
                         <span class="pipeline-step-role">Pesquisa Factual</span>
-                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">radar</span> Perplexity</div>
-                        <p class="pipeline-step-desc">Busca as circulares SUSEP ativas com links verificáveis. Elimina o risco de citar uma norma desatualizada ou inventada pela IA.</p>
+                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">radar</span> Perplexity
+                        </div>
+                        <p class="pipeline-step-desc">Busca as circulares SUSEP ativas com links verificáveis. Elimina o
+                            risco de citar uma norma desatualizada ou inventada pela IA.</p>
                     </div>
                     <div class="pipeline-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
                     <div class="pipeline-step">
                         <span class="pipeline-step-role">Estruturação e Escrita</span>
-                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">neurology</span> ChatGPT</div>
-                        <p class="pipeline-step-desc">Organiza a pesquisa bruta em documento com estrutura corporativa — tom sóbrio, linguagem executiva e seções claras para defesa em comitê.</p>
+                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">neurology</span> ChatGPT
+                        </div>
+                        <p class="pipeline-step-desc">Organiza a pesquisa bruta em documento com estrutura corporativa —
+                            tom sóbrio, linguagem executiva e seções claras para defesa em comitê.</p>
                     </div>
                     <div class="pipeline-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
                     <div class="pipeline-step">
                         <span class="pipeline-step-role">Formatação em Slide</span>
-                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">slideshow</span> Copilot Desktop</div>
-                        <p class="pipeline-step-desc">Converte o texto revisado em slides do PowerPoint institucional, dentro do ambiente M365 fechado. Dados internos não saem da nuvem corporativa.</p>
+                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">slideshow</span> Copilot
+                            Desktop</div>
+                        <p class="pipeline-step-desc">Converte o texto revisado em slides do PowerPoint institucional,
+                            dentro do ambiente M365 fechado. Dados internos não saem da nuvem corporativa.</p>
                     </div>
                 </div>
                 <div class="pipeline-time">
@@ -485,25 +932,33 @@
             <div class="pipeline-card">
                 <div class="pipeline-header">
                     <h4>Prototipagem e Auditoria de Simulador</h4>
-                    <span class="objective">Finalidade: Construir e validar um simulador financeiro sem depender de TI para a primeira versão.</span>
+                    <span class="objective">Finalidade: Construir e validar um simulador financeiro sem depender de TI
+                        para a primeira versão.</span>
                 </div>
                 <div class="pipeline-flow">
                     <div class="pipeline-step">
                         <span class="pipeline-step-role">Especificação Lógica</span>
-                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">inventory</span> ChatGPT</div>
-                        <p class="pipeline-step-desc">Recebe as premissas de negócio (margens, comissões, fórmulas) e organiza a arquitetura do simulador antes de qualquer linha de código.</p>
+                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">inventory</span> ChatGPT
+                        </div>
+                        <p class="pipeline-step-desc">Recebe as premissas de negócio (margens, comissões, fórmulas) e
+                            organiza a arquitetura do simulador antes de qualquer linha de código.</p>
                     </div>
                     <div class="pipeline-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
                     <div class="pipeline-step">
                         <span class="pipeline-step-role">Construção do Protótipo</span>
-                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">construction</span> Antigravity</div>
-                        <p class="pipeline-step-desc">Transforma a especificação em uma interface web interativa. A equipe testa os cenários pelo browser no mesmo dia, sem depender de TI.</p>
+                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">construction</span>
+                            Antigravity</div>
+                        <p class="pipeline-step-desc">Transforma a especificação em uma interface web interativa. A
+                            equipe testa os cenários pelo browser no mesmo dia, sem depender de TI.</p>
                     </div>
                     <div class="pipeline-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
                     <div class="pipeline-step" style="border-top:4px solid var(--danger);">
                         <span class="pipeline-step-role">Auditoria do Código</span>
-                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">fact_check</span> Claude</div>
-                        <p class="pipeline-step-desc">Revisa o código gerado. Identifica falhas lógicas nas fórmulas e inconsistências antes da apresentação à diretoria. Sem filtro criativo — só análise crítica.</p>
+                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">fact_check</span> Claude
+                        </div>
+                        <p class="pipeline-step-desc">Revisa o código gerado. Identifica falhas lógicas nas fórmulas e
+                            inconsistências antes da apresentação à diretoria. Sem filtro criativo — só análise crítica.
+                        </p>
                     </div>
                 </div>
                 <div class="pipeline-time">
@@ -517,23 +972,30 @@
             <div class="pipeline-card">
                 <div class="pipeline-header">
                     <h4>Ideação Estratégica com Dados Sigilosos</h4>
-                    <span class="objective">Finalidade: Explorar caminhos de produto com dados internos sem expô-los em ferramentas abertas.</span>
+                    <span class="objective">Finalidade: Explorar caminhos de produto com dados internos sem expô-los em
+                        ferramentas abertas.</span>
                 </div>
                 <div class="pipeline-flow">
                     <div class="pipeline-step">
                         <span class="pipeline-step-role">Exploração Anônima (Dados Públicos)</span>
-                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">lightbulb</span> Claude / ChatGPT</div>
-                        <p class="pipeline-step-desc">Inicia com descrições genéricas e metodológicas — sem citar nomes de produtos, parceiros ou margens reais. Gera os caminhos estratégicos possíveis.</p>
+                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">lightbulb</span> Claude
+                            / ChatGPT</div>
+                        <p class="pipeline-step-desc">Inicia com descrições genéricas e metodológicas — sem citar nomes
+                            de produtos, parceiros ou margens reais. Gera os caminhos estratégicos possíveis.</p>
                     </div>
                     <div class="pipeline-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
                     <div class="pipeline-step" style="border-top:4px solid var(--success);">
                         <span class="pipeline-step-role">Ancoragem nos Dados Internos</span>
-                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">shield</span> Copilot M365</div>
-                        <p class="pipeline-step-desc">A estratégia gerada anonimamente é transferida para o Copilot. Ele aplica a lógica nos dados reais da corretora — planilhas, contratos e comitês — dentro do ambiente seguro.</p>
+                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">shield</span> Copilot
+                            M365</div>
+                        <p class="pipeline-step-desc">A estratégia gerada anonimamente é transferida para o Copilot. Ele
+                            aplica a lógica nos dados reais da corretora — planilhas, contratos e comitês — dentro do
+                            ambiente seguro.</p>
                     </div>
                 </div>
                 <div class="pipeline-time">
-                    <span class="time-label">Ganho:</span> <span class="time-after">Ciclo de ideação sem risco de vazamento de NDA ou estratégia de produto</span>
+                    <span class="time-label">Ganho:</span> <span class="time-after">Ciclo de ideação sem risco de
+                        vazamento de NDA ou estratégia de produto</span>
                 </div>
             </div>
 
@@ -541,25 +1003,34 @@
             <div class="pipeline-card">
                 <div class="pipeline-header">
                     <h4>Ata e Pendências de Reunião</h4>
-                    <span class="objective">Finalidade: Transformar gravação de reunião em ata estruturada com responsáveis e prazos em menos de 10 minutos.</span>
+                    <span class="objective">Finalidade: Transformar gravação de reunião em ata estruturada com
+                        responsáveis e prazos em menos de 10 minutos.</span>
                 </div>
                 <div class="pipeline-flow">
                     <div class="pipeline-step">
                         <span class="pipeline-step-role">Transcrição Automática</span>
-                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">mic</span> Teams / Whisper</div>
-                        <p class="pipeline-step-desc">O Teams gera a transcrição da reunião automaticamente. Para reuniões externas, o Whisper (OpenAI) transcreve qualquer arquivo de áudio em texto.</p>
+                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">mic</span> Teams /
+                            Whisper</div>
+                        <p class="pipeline-step-desc">O Teams gera a transcrição da reunião automaticamente. Para
+                            reuniões externas, o Whisper (OpenAI) transcreve qualquer arquivo de áudio em texto.</p>
                     </div>
                     <div class="pipeline-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
                     <div class="pipeline-step">
                         <span class="pipeline-step-role">Extração de Decisões</span>
-                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">neurology</span> Claude / ChatGPT</div>
-                        <p class="pipeline-step-desc">Prompt-base: "Leia a transcrição e liste: (1) decisões tomadas, (2) tarefas com responsável e prazo, (3) pontos sem consenso que precisam de encaminhamento."</p>
+                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">neurology</span> Claude
+                            / ChatGPT</div>
+                        <p class="pipeline-step-desc">Prompt-base: "Leia a transcrição e liste: (1) decisões tomadas,
+                            (2) tarefas com responsável e prazo, (3) pontos sem consenso que precisam de
+                            encaminhamento."</p>
                     </div>
                     <div class="pipeline-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
                     <div class="pipeline-step" style="border-top:4px solid var(--success);">
                         <span class="pipeline-step-role">Distribuição Interna</span>
-                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">send</span> Copilot / Teams</div>
-                        <p class="pipeline-step-desc">A ata formatada é distribuída diretamente pelo Teams, dentro do ambiente corporativo fechado. Sem copiar e colar, sem risco de vazar conteúdo de reunião restrita.</p>
+                        <div class="pipeline-step-tool"><span class="material-symbols-outlined">send</span> Copilot /
+                            Teams</div>
+                        <p class="pipeline-step-desc">A ata formatada é distribuída diretamente pelo Teams, dentro do
+                            ambiente corporativo fechado. Sem copiar e colar, sem risco de vazar conteúdo de reunião
+                            restrita.</p>
                     </div>
                 </div>
                 <div class="pipeline-time">
@@ -571,20 +1042,32 @@
 
             <div class="section-subheader">
                 <h3>Ferramentas de Automação: Quando Usar Cada Uma</h3>
-                <p>Estas ferramentas conectam os "cérebros" (os modelos de IA) aos sistemas corporativos reais. Escolha pela sua situação, não pela popularidade da ferramenta.</p>
+                <p>Estas ferramentas conectam os "cérebros" (os modelos de IA) aos sistemas corporativos reais. Escolha
+                    pela sua situação, não pela popularidade da ferramenta.</p>
             </div>
             <div class="grid-3" style="margin-bottom:2rem;">
                 <div class="card" style="border-top:4px solid var(--brb-blue-light);">
-                    <h3 style="font-size:1.1rem; color:var(--brb-blue-dark); margin-bottom:0.5rem;"><span class="material-symbols-outlined" style="vertical-align:bottom;">grid_view</span> Power Automate</h3>
-                    <p style="font-size:0.9rem; color:var(--neut-600); line-height:1.5;">Escolha se sua organização já vive no Microsoft 365. Integra Outlook, Forms, SharePoint e Teams com aprovações hierárquicas formais e rastreabilidade corporativa nativa.</p>
+                    <h3 style="font-size:1.1rem; color:var(--brb-blue-dark); margin-bottom:0.5rem;"><span
+                            class="material-symbols-outlined" style="vertical-align:bottom;">grid_view</span> Power
+                        Automate</h3>
+                    <p style="font-size:0.9rem; color:var(--neut-600); line-height:1.5;">Escolha se sua organização já
+                        vive no Microsoft 365. Integra Outlook, Forms, SharePoint e Teams com aprovações hierárquicas
+                        formais e rastreabilidade corporativa nativa.</p>
                 </div>
                 <div class="card" style="border-top:4px solid #8b5cf6;">
-                    <h3 style="font-size:1.1rem; color:#7c3aed; margin-bottom:0.5rem;"><span class="material-symbols-outlined" style="vertical-align:bottom;">moving</span> Make</h3>
-                    <p style="font-size:0.9rem; color:var(--neut-600); line-height:1.5;">Escolha se precisa conectar apps de negócio rapidamente de forma visual — CRM, planilha, WhatsApp, Slack. Curva de aprendizado baixa, ideal para gestores que querem autonomia sem código.</p>
+                    <h3 style="font-size:1.1rem; color:#7c3aed; margin-bottom:0.5rem;"><span
+                            class="material-symbols-outlined" style="vertical-align:bottom;">moving</span> Make</h3>
+                    <p style="font-size:0.9rem; color:var(--neut-600); line-height:1.5;">Escolha se precisa conectar
+                        apps de negócio rapidamente de forma visual — CRM, planilha, WhatsApp, Slack. Curva de
+                        aprendizado baixa, ideal para gestores que querem autonomia sem código.</p>
                 </div>
                 <div class="card" style="border-top:4px solid #10b981;">
-                    <h3 style="font-size:1.1rem; color:#10b981; margin-bottom:0.5rem;"><span class="material-symbols-outlined" style="vertical-align:bottom;">account_tree</span> n8n</h3>
-                    <p style="font-size:0.9rem; color:var(--neut-600); line-height:1.5;">Escolha se precisa de integração técnica avançada — APIs proprietárias, roteamento com lógica personalizada, orquestração de agentes de IA. Requer perfil técnico para configurar.</p>
+                    <h3 style="font-size:1.1rem; color:#10b981; margin-bottom:0.5rem;"><span
+                            class="material-symbols-outlined" style="vertical-align:bottom;">account_tree</span> n8n
+                    </h3>
+                    <p style="font-size:0.9rem; color:var(--neut-600); line-height:1.5;">Escolha se precisa de
+                        integração técnica avançada — APIs proprietárias, roteamento com lógica personalizada,
+                        orquestração de agentes de IA. Requer perfil técnico para configurar.</p>
                 </div>
             </div>
         </section>
@@ -597,22 +1080,47 @@
             </div>
             <div class="grid-2">
                 <div class="card" style="border-top:4px solid var(--brb-blue-light); background:#f8fafc;">
-                    <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;"><span class="material-symbols-outlined">library_books</span> O que contexto faz pela qualidade do resultado</h3>
-                    <p style="margin-bottom:1rem;">Contexto é o que transforma um assistente genérico em um especialista calibrado para a sua corretora. Quanto mais você fornece, mais preciso e reutilizável fica o resultado.</p>
+                    <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;"><span
+                            class="material-symbols-outlined">library_books</span> O que contexto faz pela qualidade do
+                        resultado</h3>
+                    <p style="margin-bottom:1rem;">Contexto é o que transforma um assistente genérico em um especialista
+                        calibrado para a sua corretora. Quanto mais você fornece, mais preciso e reutilizável fica o
+                        resultado.</p>
                     <ul class="checklist">
-                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">insights</span> <strong>Regras do negócio:</strong> Cite normativas SUSEP/CVM, cultura interna e restrições regulatórias que se aplicam.</li>
-                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">insights</span> <strong>Quem vai receber o resultado:</strong> Marketing precisa de um tom. TI precisa de outro. Diretoria precisa de um terceiro.</li>
-                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">insights</span> <strong>Formato de saída obrigatório:</strong> Tabela, tópicos numerados, texto corrido ou bullet points. Especifique. A IA vai escolher se você não especificar.</li>
+                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">insights</span>
+                            <strong>Regras do negócio:</strong> Cite normativas SUSEP/CVM, cultura interna e restrições
+                            regulatórias que se aplicam.
+                        </li>
+                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">insights</span>
+                            <strong>Quem vai receber o resultado:</strong> Marketing precisa de um tom. TI precisa de
+                            outro. Diretoria precisa de um terceiro.
+                        </li>
+                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">insights</span>
+                            <strong>Formato de saída obrigatório:</strong> Tabela, tópicos numerados, texto corrido ou
+                            bullet points. Especifique. A IA vai escolher se você não especificar.
+                        </li>
                     </ul>
                 </div>
                 <div class="card" style="border-top:4px solid var(--brb-blue-dark);">
-                    <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;"><span class="material-symbols-outlined">rule</span> Quando você deve validar o resultado</h3>
-                    <p style="margin-bottom:1rem;">Validar não é reler tudo. É saber onde a IA erra com mais frequência e focar o seu tempo de revisão nesses pontos.</p>
-                    <div class="validate-item"><span class="material-symbols-outlined">check_box_outline_blank</span><p>O resultado tem números, datas ou nomes de regulações citadas.</p></div>
-                    <div class="validate-item"><span class="material-symbols-outlined">check_box_outline_blank</span><p>O output vai para um cliente externo ou para a diretoria.</p></div>
-                    <div class="validate-item"><span class="material-symbols-outlined">check_box_outline_blank</span><p>A tarefa envolve interpretação jurídica ou contábil.</p></div>
-                    <div class="validate-item"><span class="material-symbols-outlined">check_box_outline_blank</span><p>A ferramenta usada é aberta — não é o Copilot M365 corporativo.</p></div>
-                    <div class="validate-item"><span class="material-symbols-outlined">check_box_outline_blank</span><p>O prompt foi genérico — você sabe que não forneceu contexto suficiente.</p></div>
+                    <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;"><span
+                            class="material-symbols-outlined">rule</span> Quando você deve validar o resultado</h3>
+                    <p style="margin-bottom:1rem;">Validar não é reler tudo. É saber onde a IA erra com mais frequência
+                        e focar o seu tempo de revisão nesses pontos.</p>
+                    <div class="validate-item"><span class="material-symbols-outlined">check_box_outline_blank</span>
+                        <p>O resultado tem números, datas ou nomes de regulações citadas.</p>
+                    </div>
+                    <div class="validate-item"><span class="material-symbols-outlined">check_box_outline_blank</span>
+                        <p>O output vai para um cliente externo ou para a diretoria.</p>
+                    </div>
+                    <div class="validate-item"><span class="material-symbols-outlined">check_box_outline_blank</span>
+                        <p>A tarefa envolve interpretação jurídica ou contábil.</p>
+                    </div>
+                    <div class="validate-item"><span class="material-symbols-outlined">check_box_outline_blank</span>
+                        <p>A ferramenta usada é aberta — não é o Copilot M365 corporativo.</p>
+                    </div>
+                    <div class="validate-item"><span class="material-symbols-outlined">check_box_outline_blank</span>
+                        <p>O prompt foi genérico — você sabe que não forneceu contexto suficiente.</p>
+                    </div>
                 </div>
             </div>
         </section>
@@ -621,25 +1129,34 @@
         <section id="prompt-eng">
             <div class="section-header">
                 <h2>Como dar um Briefing para a IA</h2>
-                <p>Um prompt é exatamente igual a um briefing para uma agência ou para a TI. Quanto mais claro, mais correto o resultado. Use os mesmos 4 blocos que você usaria para delegar a um gerente sênior.</p>
+                <p>Um prompt é exatamente igual a um briefing para uma agência ou para a TI. Quanto mais claro, mais
+                    correto o resultado. Use os mesmos 4 blocos que você usaria para delegar a um gerente sênior.</p>
             </div>
 
             <div class="grid-4" style="text-align:center; margin-bottom:3rem;">
                 <div class="card" style="padding:1.5rem 1rem; border-top:3px solid var(--brb-blue-dark);">
                     <strong style="color:var(--brb-blue-dark);">1. Papel</strong><br>
-                    <span style="font-size:0.8rem; font-weight:400; color:#475569; display:block; margin-top:0.5rem;">"Atue como um analista atuarial com foco em rentabilidade de carteira."</span>
+                    <span
+                        style="font-size:0.8rem; font-weight:400; color:#475569; display:block; margin-top:0.5rem;">"Atue
+                        como um analista atuarial com foco em rentabilidade de carteira."</span>
                 </div>
                 <div class="card" style="padding:1.5rem 1rem; border-top:3px solid var(--brb-blue-light);">
                     <strong style="color:var(--brb-blue-dark);">2. Contexto</strong><br>
-                    <span style="font-size:0.8rem; font-weight:400; color:#475569; display:block; margin-top:0.5rem;">"Este relatório será apresentado ao comitê de produtos. Tom executivo, linguagem sóbria."</span>
+                    <span
+                        style="font-size:0.8rem; font-weight:400; color:#475569; display:block; margin-top:0.5rem;">"Este
+                        relatório será apresentado ao comitê de produtos. Tom executivo, linguagem sóbria."</span>
                 </div>
                 <div class="card" style="padding:1.5rem 1rem; border-top:3px solid var(--brb-blue-dark);">
                     <strong style="color:var(--brb-blue-dark);">3. Tarefa</strong><br>
-                    <span style="font-size:0.8rem; font-weight:400; color:#475569; display:block; margin-top:0.5rem;">"Analise o texto abaixo e aponte os 3 principais riscos que um comitê de aprovação levantaria."</span>
+                    <span
+                        style="font-size:0.8rem; font-weight:400; color:#475569; display:block; margin-top:0.5rem;">"Analise
+                        o texto abaixo e aponte os 3 principais riscos que um comitê de aprovação levantaria."</span>
                 </div>
                 <div class="card" style="padding:1.5rem 1rem; border-top:3px solid var(--brb-blue-light);">
                     <strong style="color:var(--brb-blue-dark);">4. Formato</strong><br>
-                    <span style="font-size:0.8rem; font-weight:400; color:#475569; display:block; margin-top:0.5rem;">"Responda em 3 tópicos numerados, cada um com no máximo 2 linhas."</span>
+                    <span
+                        style="font-size:0.8rem; font-weight:400; color:#475569; display:block; margin-top:0.5rem;">"Responda
+                        em 3 tópicos numerados, cada um com no máximo 2 linhas."</span>
                 </div>
             </div>
 
@@ -647,39 +1164,69 @@
                 <h3>Os 4 erros mais comuns de briefing</h3>
                 <p>Esses erros explicam a maioria dos resultados que precisam ser refeitos.</p>
             </div>
-            <div class="error-item"><div><span class="error-label">Erro 1 — Tarefa sem contexto</span><p>"Escreva um relatório." — Para quem? Sobre o quê? Em qual tom? A IA vai inventar o contexto.</p></div></div>
-            <div class="error-item"><div><span class="error-label">Erro 2 — Pedido genérico demais</span><p>"Me ajude com esse contrato." — O quê exatamente? Revisar? Resumir? Comparar com outro? Seja específico.</p></div></div>
-            <div class="error-item"><div><span class="error-label">Erro 3 — Sem formato de saída</span><p>Sem instrução de formato, a IA escolhe. Quase nunca será o formato que você precisa.</p></div></div>
-            <div class="error-item"><div><span class="error-label">Erro 4 — Dado sensível em ferramenta aberta</span><p>Inserir dados internos no ChatGPT público é potencial violação de LGPD. Use Copilot M365 para qualquer dado proprietário.</p></div></div>
+            <div class="error-item">
+                <div><span class="error-label">Erro 1 — Tarefa sem contexto</span>
+                    <p>"Escreva um relatório." — Para quem? Sobre o quê? Em qual tom? A IA vai inventar o contexto.</p>
+                </div>
+            </div>
+            <div class="error-item">
+                <div><span class="error-label">Erro 2 — Pedido genérico demais</span>
+                    <p>"Me ajude com esse contrato." — O quê exatamente? Revisar? Resumir? Comparar com outro? Seja
+                        específico.</p>
+                </div>
+            </div>
+            <div class="error-item">
+                <div><span class="error-label">Erro 3 — Sem formato de saída</span>
+                    <p>Sem instrução de formato, a IA escolhe. Quase nunca será o formato que você precisa.</p>
+                </div>
+            </div>
+            <div class="error-item">
+                <div><span class="error-label">Erro 4 — Dado sensível em ferramenta aberta</span>
+                    <p>Inserir dados internos no ChatGPT público é potencial violação de LGPD. Use Copilot M365 para
+                        qualquer dado proprietário.</p>
+                </div>
+            </div>
         </section>
 
         <!-- ===== SEÇÃO 11: ESPECIFICAÇÃO ESTRUTURADA ===== -->
         <section id="spec-driven">
             <div class="section-header">
                 <h2>Do Briefing à Especificação Estruturada</h2>
-                <p>Quando a tarefa é recorrente ou envolve múltiplas etapas, um prompt isolado não basta. A Especificação Estruturada resolve rotinas inteiras — não só tarefas únicas.</p>
+                <p>Quando a tarefa é recorrente ou envolve múltiplas etapas, um prompt isolado não basta. A
+                    Especificação Estruturada resolve rotinas inteiras — não só tarefas únicas.</p>
             </div>
 
-            <div class="callout" style="border-left-color:var(--brb-blue-light); background:rgba(0,174,239,0.05); margin-bottom:2rem;">
-                <h4 style="color:var(--brb-blue-dark); font-size:1.1rem; font-weight:700; margin-bottom:0.5rem;">Briefing resolve uma tarefa. Especificação resolve uma rotina.</h4>
-                <p style="color:var(--neut-800);">Use Especificação quando o processo tem critérios de aceite inegociáveis, envolve mais de uma ferramenta ou precisa ser replicável pelo time sem depender de você para instruir cada vez.</p>
+            <div class="callout"
+                style="border-left-color:var(--brb-blue-light); background:rgba(0,174,239,0.05); margin-bottom:2rem;">
+                <h4 style="color:var(--brb-blue-dark); font-size:1.1rem; font-weight:700; margin-bottom:0.5rem;">
+                    Briefing resolve uma tarefa. Especificação resolve uma rotina.</h4>
+                <p style="color:var(--neut-800);">Use Especificação quando o processo tem critérios de aceite
+                    inegociáveis, envolve mais de uma ferramenta ou precisa ser replicável pelo time sem depender de
+                    você para instruir cada vez.</p>
             </div>
 
             <div class="grid-2" style="margin-bottom:3rem;">
                 <div class="card" style="border-top:4px solid var(--neut-300);">
                     <h3 style="color:var(--neut-800); margin-bottom:1rem;">Quando um briefing basta</h3>
                     <ul class="checklist">
-                        <li><span class="material-symbols-outlined" style="color:var(--neut-400, #94a3b8)">check</span> Resumos executivos pontuais e sínteses textuais urgentes.</li>
-                        <li><span class="material-symbols-outlined" style="color:var(--neut-400, #94a3b8)">check</span> Ideação avulsa para um discurso ou apresentação única.</li>
-                        <li><span class="material-symbols-outlined" style="color:var(--neut-400, #94a3b8)">check</span> Tarefas sem critério formal de aceite vinculado.</li>
+                        <li><span class="material-symbols-outlined" style="color:var(--neut-400, #94a3b8)">check</span>
+                            Resumos executivos pontuais e sínteses textuais urgentes.</li>
+                        <li><span class="material-symbols-outlined" style="color:var(--neut-400, #94a3b8)">check</span>
+                            Ideação avulsa para um discurso ou apresentação única.</li>
+                        <li><span class="material-symbols-outlined" style="color:var(--neut-400, #94a3b8)">check</span>
+                            Tarefas sem critério formal de aceite vinculado.</li>
                     </ul>
                 </div>
                 <div class="card" style="border-top:4px solid var(--brb-blue-light); background:#f8fafc;">
-                    <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;">Quando migrar para Especificação Formal</h3>
+                    <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;">Quando migrar para Especificação Formal
+                    </h3>
                     <ul class="checklist">
-                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">insights</span> Painéis de recorrência gerencial — diários, semanais, mensais.</li>
-                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">insights</span> Simuladores de rentabilidade que cruzam múltiplas variáveis.</li>
-                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">insights</span> Entregas com critérios de aceite regulatórios obrigatórios (SUSEP, CVM).</li>
+                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">insights</span>
+                            Painéis de recorrência gerencial — diários, semanais, mensais.</li>
+                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">insights</span>
+                            Simuladores de rentabilidade que cruzam múltiplas variáveis.</li>
+                        <li><span class="material-symbols-outlined" style="color:var(--brb-blue-light)">insights</span>
+                            Entregas com critérios de aceite regulatórios obrigatórios (SUSEP, CVM).</li>
                     </ul>
                 </div>
             </div>
@@ -687,36 +1234,48 @@
             <div class="section-subheader">
                 <h3>O fluxo de 4 fases da Especificação</h3>
             </div>
-            <div class="pipeline-flow" style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:2rem; margin-bottom:3rem;">
+            <div class="pipeline-flow"
+                style="background:var(--bg-card); border:1px solid var(--border-color); border-radius:12px; padding:2rem; margin-bottom:3rem;">
                 <div class="pipeline-step">
                     <span class="pipeline-step-role">Fase 1</span>
-                    <div class="pipeline-step-tool"><span class="material-symbols-outlined">filter_center_focus</span> Delimitar o Problema</div>
-                    <p class="pipeline-step-desc">Defina o problema primário com as métricas e variáveis reais que o processo usa. Sem fronteira clara, qualquer automação vai produzir resultado errado.</p>
+                    <div class="pipeline-step-tool"><span class="material-symbols-outlined">filter_center_focus</span>
+                        Delimitar o Problema</div>
+                    <p class="pipeline-step-desc">Defina o problema primário com as métricas e variáveis reais que o
+                        processo usa. Sem fronteira clara, qualquer automação vai produzir resultado errado.</p>
                 </div>
                 <div class="pipeline-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
                 <div class="pipeline-step">
                     <span class="pipeline-step-role">Fase 2</span>
-                    <div class="pipeline-step-tool"><span class="material-symbols-outlined">architecture</span> Arquitetar a Lógica</div>
-                    <p class="pipeline-step-desc">Converta a intenção de negócio em etapas obrigatórias com critérios de aceite explícitos. Quem faz o quê, em qual ordem, com qual critério de aprovação.</p>
+                    <div class="pipeline-step-tool"><span class="material-symbols-outlined">architecture</span>
+                        Arquitetar a Lógica</div>
+                    <p class="pipeline-step-desc">Converta a intenção de negócio em etapas obrigatórias com critérios de
+                        aceite explícitos. Quem faz o quê, em qual ordem, com qual critério de aprovação.</p>
                 </div>
                 <div class="pipeline-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
                 <div class="pipeline-step">
                     <span class="pipeline-step-role">Fase 3</span>
-                    <div class="pipeline-step-tool"><span class="material-symbols-outlined">splitscreen</span> Atomizar as Etapas</div>
-                    <p class="pipeline-step-desc">Quebre a entrega macro em passos menores e verificáveis. Cada passo precisa ter um resultado concreto que você consegue checar antes de avançar.</p>
+                    <div class="pipeline-step-tool"><span class="material-symbols-outlined">splitscreen</span> Atomizar
+                        as Etapas</div>
+                    <p class="pipeline-step-desc">Quebre a entrega macro em passos menores e verificáveis. Cada passo
+                        precisa ter um resultado concreto que você consegue checar antes de avançar.</p>
                 </div>
                 <div class="pipeline-arrow"><span class="material-symbols-outlined">arrow_forward</span></div>
                 <div class="pipeline-step" style="border-top:4px solid var(--brb-blue-light);">
                     <span class="pipeline-step-role">Fase 4</span>
-                    <div class="pipeline-step-tool"><span class="material-symbols-outlined">fact_check</span> Piloto e Controle</div>
-                    <p class="pipeline-step-desc">Teste com dados reais em escala pequena. Automatize só o que passou pela validação humana. O gestor da alçada aprova antes de escalar para o time inteiro.</p>
+                    <div class="pipeline-step-tool"><span class="material-symbols-outlined">fact_check</span> Piloto e
+                        Controle</div>
+                    <p class="pipeline-step-desc">Teste com dados reais em escala pequena. Automatize só o que passou
+                        pela validação humana. O gestor da alçada aprova antes de escalar para o time inteiro.</p>
                 </div>
             </div>
 
-            <div style="text-align:center; max-width:700px; margin:4rem auto 1rem auto; padding:2.5rem; background:#0f172a; border-radius:16px;">
+            <div
+                style="text-align:center; max-width:700px; margin:4rem auto 1rem auto; padding:2.5rem; background:#0f172a; border-radius:16px;">
                 <p style="font-size:1.1rem; font-weight:300; color:#cbd5e1; line-height:1.6; margin:0;">
                     Maturidade em IA corporativa não é sobre quantas ferramentas você comprou.<br>
-                    <strong style="color:white; font-weight:700;">É sobre a capacidade de mapear uma dor real e organizar a lógica de negócio com clareza suficiente para que uma máquina execute — e um humano audite.</strong>
+                    <strong style="color:white; font-weight:700;">É sobre a capacidade de mapear uma dor real e
+                        organizar a lógica de negócio com clareza suficiente para que uma máquina execute — e um humano
+                        audite.</strong>
                 </p>
             </div>
         </section>
@@ -725,7 +1284,8 @@
         <section id="biblioteca">
             <div class="section-header">
                 <h2>Biblioteca de Prompts Práticos</h2>
-                <p>Instruções testadas para os gargalos analíticos mais comuns da corretora. Copie, adapte e compartilhe com o time.</p>
+                <p>Instruções testadas para os gargalos analíticos mais comuns da corretora. Copie, adapte e compartilhe
+                    com o time.</p>
             </div>
             <div class="tabs-container">
                 <div class="tabs-nav">
@@ -736,59 +1296,69 @@
 
                 <div class="tab-content active" id="tab-meta">
                     <div class="prompt-block">
-                        <div class="prompt-title">Objetivo: Transformar uma demanda vaga em briefing corporativo estruturado</div>
-                        <button class="copy-btn"><span class="material-symbols-outlined">content_copy</span> Copiar</button>
+                        <div class="prompt-title">Objetivo: Transformar uma demanda vaga em briefing corporativo
+                            estruturado</div>
+                        <button class="copy-btn"><span class="material-symbols-outlined">content_copy</span>
+                            Copiar</button>
                         <div class="prompt-content">Atue como especialista em clareza de processos corporativos.
 
-Examine a demanda bruta abaixo:
-"[Cole aqui a demanda ou instrução original]"
+                            Examine a demanda bruta abaixo:
+                            "[Cole aqui a demanda ou instrução original]"
 
-Seu único objetivo é:
-1. Listar as ambiguidades que tornam essa demanda arriscada de executar.
-2. Reescrever o briefing usando o formato: Papel → Contexto → Tarefa → Formato de saída.
-3. Entregar o prompt final corrigido em um bloco de texto pronto para uso.
+                            Seu único objetivo é:
+                            1. Listar as ambiguidades que tornam essa demanda arriscada de executar.
+                            2. Reescrever o briefing usando o formato: Papel → Contexto → Tarefa → Formato de saída.
+                            3. Entregar o prompt final corrigido em um bloco de texto pronto para uso.
 
-Não execute a tarefa original. Apenas corrija e estruture o briefing.</div>
+                            Não execute a tarefa original. Apenas corrija e estruture o briefing.</div>
                     </div>
                 </div>
 
                 <div class="tab-content" id="tab-review">
                     <div class="prompt-block">
-                        <div class="prompt-title">Objetivo: Identificar falhas e premissas otimistas em planejamentos comerciais</div>
-                        <button class="copy-btn"><span class="material-symbols-outlined">content_copy</span> Copiar</button>
-                        <div class="prompt-content">Atue como Auditor Independente de Negócios. Sua função é encontrar problemas, não validar.
+                        <div class="prompt-title">Objetivo: Identificar falhas e premissas otimistas em planejamentos
+                            comerciais</div>
+                        <button class="copy-btn"><span class="material-symbols-outlined">content_copy</span>
+                            Copiar</button>
+                        <div class="prompt-content">Atue como Auditor Independente de Negócios. Sua função é encontrar
+                            problemas, não validar.
 
-Receba o planejamento do Q3 para o produto X abaixo:
-[Insira os dados macro do planejamento]
+                            Receba o planejamento do Q3 para o produto X abaixo:
+                            [Insira os dados macro do planejamento]
 
-Seu trabalho:
-- Identifique premissas de vendas otimistas demais.
-- Aponte gargalos fiscais ou operacionais que o plano ignora.
-- Sinalize rupturas no pipeline que podem comprometer a entrega.
+                            Seu trabalho:
+                            - Identifique premissas de vendas otimistas demais.
+                            - Aponte gargalos fiscais ou operacionais que o plano ignora.
+                            - Sinalize rupturas no pipeline que podem comprometer a entrega.
 
-Formato de resposta: tabela com 3 colunas — (1) Falha identificada, (2) Causa provável, (3) Ação corretiva sugerida.
+                            Formato de resposta: tabela com 3 colunas — (1) Falha identificada, (2) Causa provável, (3)
+                            Ação corretiva sugerida.
 
-Seja cético. Não valide o que está certo — só exponha o que pode dar errado.</div>
+                            Seja cético. Não valide o que está certo — só exponha o que pode dar errado.</div>
                     </div>
                 </div>
 
                 <div class="tab-content" id="tab-plan">
                     <div class="prompt-block">
-                        <div class="prompt-title">Objetivo: Mapear o ponto de estrangulamento de margem em modelos de remuneração</div>
-                        <button class="copy-btn"><span class="material-symbols-outlined">content_copy</span> Copiar</button>
-                        <div class="prompt-content">Atue como especialista em modelagem financeira de produtos bancários.
+                        <div class="prompt-title">Objetivo: Mapear o ponto de estrangulamento de margem em modelos de
+                            remuneração</div>
+                        <button class="copy-btn"><span class="material-symbols-outlined">content_copy</span>
+                            Copiar</button>
+                        <div class="prompt-content">Atue como especialista em modelagem financeira de produtos
+                            bancários.
 
-Estou testando uma nova estrutura de remuneração de parceiros. Receba os dados base:
-- Meta de produção: [X]
-- Comissão fixada por faixa: [Y]
-- EBITDA alvo: [Z]
+                            Estou testando uma nova estrutura de remuneração de parceiros. Receba os dados base:
+                            - Meta de produção: [X]
+                            - Comissão fixada por faixa: [Y]
+                            - EBITDA alvo: [Z]
 
-Seu trabalho:
-1. Mapear em quais cenários de volume a margem de EBITDA começa a ser pressionada.
-2. Identificar o ponto exato de estrangulamento (onde a comissão corrói a margem mínima viável).
-3. Gerar a fórmula Excel/Sheets que simula e atesta essa ruptura.
+                            Seu trabalho:
+                            1. Mapear em quais cenários de volume a margem de EBITDA começa a ser pressionada.
+                            2. Identificar o ponto exato de estrangulamento (onde a comissão corrói a margem mínima
+                            viável).
+                            3. Gerar a fórmula Excel/Sheets que simula e atesta essa ruptura.
 
-Entregue os 3 itens separadamente, com a fórmula pronta para colar na planilha.</div>
+                            Entregue os 3 itens separadamente, com a fórmula pronta para colar na planilha.</div>
                     </div>
                 </div>
             </div>
@@ -803,7 +1373,8 @@ Entregue os 3 itens separadamente, com a fórmula pronta para colar na planilha.
 
             <div class="section-subheader">
                 <h3>A régua de maturidade: 4 estágios de adoção</h3>
-                <p>Cada estágio constrói sobre o anterior. Não pule etapas — automatizar um processo que ainda não está padronizado gera retrabalho.</p>
+                <p>Cada estágio constrói sobre o anterior. Não pule etapas — automatizar um processo que ainda não está
+                    padronizado gera retrabalho.</p>
             </div>
 
             <div class="card" style="padding:0; overflow:hidden; margin-bottom:2rem;">
@@ -811,54 +1382,73 @@ Entregue os 3 itens separadamente, com a fórmula pronta para colar na planilha.
                     <div class="maturity-level">1</div>
                     <div class="maturity-content">
                         <h4>Instrução Manual</h4>
-                        <p>O analista copia e cola o texto e pede para a IA analisar. Processo lento, sem padrão e sem rastreabilidade. Ponto de partida para todos.</p>
+                        <p>O analista copia e cola o texto e pede para a IA analisar. Processo lento, sem padrão e sem
+                            rastreabilidade. Ponto de partida para todos.</p>
                     </div>
                 </div>
                 <div class="maturity-row">
                     <div class="maturity-level">2</div>
                     <div class="maturity-content">
                         <h4>Biblioteca de Prompts Validados</h4>
-                        <p>A equipe cria e compartilha prompts testados. O mesmo briefing gera o mesmo formato de saída para todos. O time para de reinventar a roda.</p>
+                        <p>A equipe cria e compartilha prompts testados. O mesmo briefing gera o mesmo formato de saída
+                            para todos. O time para de reinventar a roda.</p>
                     </div>
                 </div>
                 <div class="maturity-row current">
                     <div class="maturity-level">3</div>
                     <div class="maturity-content">
                         <h4>Skills e Assistentes Focados</h4>
-                        <p>Um assistente treinado só para revisar apólices SUSEP. O analista sobe o PDF e recebe o risco validado em segundos. Sem precisar redigir o briefing toda vez.</p>
+                        <p>Um assistente treinado só para revisar apólices SUSEP. O analista sobe o PDF e recebe o risco
+                            validado em segundos. Sem precisar redigir o briefing toda vez.</p>
                     </div>
                 </div>
                 <div class="maturity-row">
                     <div class="maturity-level">4</div>
                     <div class="maturity-content">
                         <h4>Agentes com MCP (Acesso a Sistemas)</h4>
-                        <p>A IA acessa o CRM e o ERP via ponte segura (MCP). Avalia apólices ativas, cruza com metas de produção e gera o relatório no painel — sem intervenção manual no meio do processo.</p>
+                        <p>A IA acessa o CRM e o ERP via ponte segura (MCP). Avalia apólices ativas, cruza com metas de
+                            produção e gera o relatório no painel — sem intervenção manual no meio do processo.</p>
                     </div>
                 </div>
             </div>
 
             <div class="callout" style="border-left-color:#f59e0b; background:rgba(245,158,11,0.05);">
-                <h4 style="color:#b45309;"><span class="material-symbols-outlined">api</span> O que é o MCP (Model Context Protocol)?</h4>
-                <p>É a ponte segura entre a IA e os sistemas internos da empresa. Em vez de exportar planilhas e colar no chat, o MCP autoriza o agente a consultar dados diretamente no CRM, no ERP ou no banco de dados — respeitando as permissões de acesso existentes e mantendo a rastreabilidade da TI. Dados internos ficam internos.</p>
+                <h4 style="color:#b45309;"><span class="material-symbols-outlined">api</span> O que é o MCP (Model
+                    Context Protocol)?</h4>
+                <p>É a ponte segura entre a IA e os sistemas internos da empresa. Em vez de exportar planilhas e colar
+                    no chat, o MCP autoriza o agente a consultar dados diretamente no CRM, no ERP ou no banco de dados —
+                    respeitando as permissões de acesso existentes e mantendo a rastreabilidade da TI. Dados internos
+                    ficam internos.</p>
             </div>
 
-            <div style="background:#f8fafc; border:1px solid var(--neut-200); border-radius:12px; padding:1.5rem 2rem; margin-top:1.5rem;">
+            <div
+                style="background:#f8fafc; border:1px solid var(--neut-200); border-radius:12px; padding:1.5rem 2rem; margin-top:1.5rem;">
                 <h4 style="color:var(--brb-blue-dark); margin-bottom:1rem;">Quando faz sentido usar agentes?</h4>
                 <div class="grid-2">
                     <div>
-                        <p style="font-weight:700; color:var(--success); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.5rem;">Use agentes quando:</p>
+                        <p
+                            style="font-weight:700; color:var(--success); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.5rem;">
+                            Use agentes quando:</p>
                         <ul class="checklist">
-                            <li><span class="material-symbols-outlined">check</span> A mesma tarefa se repete com a mesma lógica ao menos 3x por semana.</li>
-                            <li><span class="material-symbols-outlined">check</span> O processo envolve consultar mais de uma fonte de dados.</li>
-                            <li><span class="material-symbols-outlined">check</span> O volume impede que um humano faça com qualidade no tempo disponível.</li>
+                            <li><span class="material-symbols-outlined">check</span> A mesma tarefa se repete com a
+                                mesma lógica ao menos 3x por semana.</li>
+                            <li><span class="material-symbols-outlined">check</span> O processo envolve consultar mais
+                                de uma fonte de dados.</li>
+                            <li><span class="material-symbols-outlined">check</span> O volume impede que um humano faça
+                                com qualidade no tempo disponível.</li>
                         </ul>
                     </div>
                     <div>
-                        <p style="font-weight:700; color:var(--danger); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.5rem;">Não use agentes quando:</p>
+                        <p
+                            style="font-weight:700; color:var(--danger); font-size:0.85rem; text-transform:uppercase; letter-spacing:0.5px; margin-bottom:0.5rem;">
+                            Não use agentes quando:</p>
                         <ul class="checklist">
-                            <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span> O processo ainda muda com frequência — automatizar caos gera mais caos.</li>
-                            <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span> A tarefa exige julgamento subjetivo que muda caso a caso.</li>
-                            <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span> Não há uma aprovação humana prevista para ações irreversíveis.</li>
+                            <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span> O
+                                processo ainda muda com frequência — automatizar caos gera mais caos.</li>
+                            <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span> A
+                                tarefa exige julgamento subjetivo que muda caso a caso.</li>
+                            <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span> Não há
+                                uma aprovação humana prevista para ações irreversíveis.</li>
                         </ul>
                     </div>
                 </div>
@@ -869,42 +1459,88 @@ Entregue os 3 itens separadamente, com a fórmula pronta para colar na planilha.
         <section id="governanca">
             <div class="section-header">
                 <h2>Governança e Dados Sensíveis</h2>
-                <p>Para uma corretora, a governança não é burocracia. É o que diferencia adoção inteligente de risco operacional real.</p>
+                <p>Para uma corretora, a governança não é burocracia. É o que diferencia adoção inteligente de risco
+                    operacional real.</p>
             </div>
 
             <div class="section-subheader">
                 <h3>O que pode e o que não pode sair da empresa</h3>
-                <p>Regra simples: se o dado não pode sair do seu e-mail corporativo, não pode entrar em uma IA aberta.</p>
+                <p>Regra simples: se o dado não pode sair do seu e-mail corporativo, não pode entrar em uma IA aberta.
+                </p>
             </div>
             <div style="overflow-x:auto; margin-bottom:3rem; border-radius:12px;">
                 <table class="data-table">
                     <thead>
-                        <tr><th>Tipo de dado</th><th>Pode usar em IA aberta?</th><th>Ferramenta adequada</th></tr>
+                        <tr>
+                            <th>Tipo de dado</th>
+                            <th>Pode usar em IA aberta?</th>
+                            <th>Ferramenta adequada</th>
+                        </tr>
                     </thead>
                     <tbody>
-                        <tr><td>Benchmarks públicos de mercado</td><td class="yes">Sim</td><td>Qualquer ferramenta</td></tr>
-                        <tr><td>Textos de marketing e comunicação externa</td><td class="yes">Sim</td><td>Qualquer ferramenta</td></tr>
-                        <tr><td>Nomes, CPFs e dados de clientes</td><td class="no">Não</td><td>Somente Copilot M365</td></tr>
-                        <tr><td>Balanços, DRE e dados financeiros internos</td><td class="no">Não</td><td>Somente Copilot M365</td></tr>
-                        <tr><td>Contratos com NDA e dados de parceiros</td><td class="no">Não</td><td>Somente Copilot M365</td></tr>
-                        <tr><td>Estratégias de produto em desenvolvimento</td><td class="no">Não</td><td>Somente Copilot M365</td></tr>
+                        <tr>
+                            <td>Benchmarks públicos de mercado</td>
+                            <td class="yes">Sim</td>
+                            <td>Qualquer ferramenta</td>
+                        </tr>
+                        <tr>
+                            <td>Textos de marketing e comunicação externa</td>
+                            <td class="yes">Sim</td>
+                            <td>Qualquer ferramenta</td>
+                        </tr>
+                        <tr>
+                            <td>Nomes, CPFs e dados de clientes</td>
+                            <td class="no">Não</td>
+                            <td>Somente Copilot M365</td>
+                        </tr>
+                        <tr>
+                            <td>Balanços, DRE e dados financeiros internos</td>
+                            <td class="no">Não</td>
+                            <td>Somente Copilot M365</td>
+                        </tr>
+                        <tr>
+                            <td>Contratos com NDA e dados de parceiros</td>
+                            <td class="no">Não</td>
+                            <td>Somente Copilot M365</td>
+                        </tr>
+                        <tr>
+                            <td>Estratégias de produto em desenvolvimento</td>
+                            <td class="no">Não</td>
+                            <td>Somente Copilot M365</td>
+                        </tr>
                     </tbody>
                 </table>
             </div>
 
             <div class="grid-2">
                 <div class="card" style="border-left:4px solid var(--danger);">
-                    <h3 style="color:var(--danger); margin-bottom:1rem;"><span class="material-symbols-outlined">gpp_bad</span> Os 3 Riscos Críticos</h3>
+                    <h3 style="color:var(--danger); margin-bottom:1rem;"><span
+                            class="material-symbols-outlined">gpp_bad</span> Os 3 Riscos Críticos</h3>
                     <ul class="checklist">
-                        <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span> <strong>Alucinação:</strong> A IA inventa normas SUSEP com confiança. Valide sempre números, datas e citações regulatórias em fontes oficiais antes de usar.</li>
-                        <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span> <strong>Aprovação sem auditoria:</strong> Aprovar tabelas financeiras geradas pela IA sem conferir no Excel local. Uma fórmula errada passa despercebida até virar problema.</li>
-                        <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span> <strong>Dados internos em IA aberta:</strong> Inserir premissas fiscais de filiais no ChatGPT público é potencial violação de LGPD e de acordo de confidencialidade com parceiros.</li>
+                        <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span>
+                            <strong>Alucinação:</strong> A IA inventa normas SUSEP com confiança. Valide sempre números,
+                            datas e citações regulatórias em fontes oficiais antes de usar.
+                        </li>
+                        <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span>
+                            <strong>Aprovação sem auditoria:</strong> Aprovar tabelas financeiras geradas pela IA sem
+                            conferir no Excel local. Uma fórmula errada passa despercebida até virar problema.
+                        </li>
+                        <li><span class="material-symbols-outlined" style="color:var(--danger)">close</span>
+                            <strong>Dados internos em IA aberta:</strong> Inserir premissas fiscais de filiais no
+                            ChatGPT público é potencial violação de LGPD e de acordo de confidencialidade com parceiros.
+                        </li>
                     </ul>
                 </div>
                 <div class="card" style="background:#f8fafc;">
-                    <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;"><span class="material-symbols-outlined">rule_folder</span> As 2 Regras Fixas de Governança</h3>
-                    <p style="margin-bottom:1.25rem;"><strong>Copilot M365 para dados internos:</strong> Qualquer análise que envolva balanço, carteira de clientes, contratos sigilosos ou estratégia de produto acontece exclusivamente dentro do ambiente Azure M365 da organização. Sem exceções.</p>
-                    <p><strong>Human-in-the-Loop em todo fluxo autônomo:</strong> "Human-in-the-Loop" significa que a IA executa, mas um humano autorizado aprova antes de qualquer ação irreversível — envio em massa, atualização de banco de dados ou publicação de documento oficial. A IA acelera; o gestor assina.</p>
+                    <h3 style="color:var(--brb-blue-dark); margin-bottom:1rem;"><span
+                            class="material-symbols-outlined">rule_folder</span> As 2 Regras Fixas de Governança</h3>
+                    <p style="margin-bottom:1.25rem;"><strong>Copilot M365 para dados internos:</strong> Qualquer
+                        análise que envolva balanço, carteira de clientes, contratos sigilosos ou estratégia de produto
+                        acontece exclusivamente dentro do ambiente Azure M365 da organização. Sem exceções.</p>
+                    <p><strong>Human-in-the-Loop em todo fluxo autônomo:</strong> "Human-in-the-Loop" significa que a IA
+                        executa, mas um humano autorizado aprova antes de qualquer ação irreversível — envio em massa,
+                        atualização de banco de dados ou publicação de documento oficial. A IA acelera; o gestor assina.
+                    </p>
                 </div>
             </div>
         </section>
@@ -912,33 +1548,40 @@ Entregue os 3 itens separadamente, com a fórmula pronta para colar na planilha.
         <!-- ===== SEÇÃO 15: SEMANA DE ATIVAÇÃO ===== -->
         <section id="playbook">
             <div class="hero-manifesto" style="padding:4rem; margin-bottom:3rem;">
-                <h2 style="font-size:2.2rem; margin-bottom:0.5rem; color:white; text-align:center;">A Grande Síntese: O Stack Mental</h2>
-                <p style="text-align:center; color:var(--brb-blue-light); margin-bottom:2rem; font-size:1rem;">Os 5 passos que seu time deve internalizar.</p>
+                <h2 style="font-size:2.2rem; margin-bottom:0.5rem; color:white; text-align:center;">A Grande Síntese: O
+                    Stack Mental</h2>
+                <p style="text-align:center; color:var(--brb-blue-light); margin-bottom:2rem; font-size:1rem;">Os 5
+                    passos que seu time deve internalizar.</p>
                 <div class="stack-mental">
                     <div class="stack-step">
                         <span class="stack-icon material-symbols-outlined">neurology</span>
                         1. Estruture
-                        <span class="stack-desc">Use Claude ou ChatGPT para organizar o raciocínio antes de escrever qualquer documento.</span>
+                        <span class="stack-desc">Use Claude ou ChatGPT para organizar o raciocínio antes de escrever
+                            qualquer documento.</span>
                     </div>
                     <div class="stack-step">
                         <span class="stack-icon material-symbols-outlined">radar</span>
                         2. Verifique
-                        <span class="stack-desc">Use Perplexity para checar dados e regulações com fontes rastreáveis. Nunca confie em número sem fonte.</span>
+                        <span class="stack-desc">Use Perplexity para checar dados e regulações com fontes rastreáveis.
+                            Nunca confie em número sem fonte.</span>
                     </div>
                     <div class="stack-step">
                         <span class="stack-icon material-symbols-outlined">precision_manufacturing</span>
                         3. Prototipe
-                        <span class="stack-desc">Use Lovable ou Stitch para transformar especificações em telas antes de pedir para TI.</span>
+                        <span class="stack-desc">Use Lovable ou Stitch para transformar especificações em telas antes de
+                            pedir para TI.</span>
                     </div>
                     <div class="stack-step">
                         <span class="stack-icon material-symbols-outlined">policy</span>
                         4. Audite
-                        <span class="stack-desc">Use Claude Opus para revisar o que foi gerado antes de enviar para diretoria ou cliente.</span>
+                        <span class="stack-desc">Use Claude Opus para revisar o que foi gerado antes de enviar para
+                            diretoria ou cliente.</span>
                     </div>
                     <div class="stack-step highlight">
                         <span class="stack-icon material-symbols-outlined">done_all</span>
                         5. Decida
-                        <span class="stack-desc">O julgamento final é sempre humano. A IA acelera o processo. O gestor assina.</span>
+                        <span class="stack-desc">O julgamento final é sempre humano. A IA acelera o processo. O gestor
+                            assina.</span>
                     </div>
                 </div>
             </div>
@@ -946,42 +1589,50 @@ Entregue os 3 itens separadamente, com a fórmula pronta para colar na planilha.
             <div class="activation-section">
                 <div class="section-header">
                     <h2>Plano de Ativação: Os Próximos 5 Dias</h2>
-                    <p>Saia deste workshop com um plano concreto. O que você e sua equipe fazem nos próximos 5 dias úteis.</p>
+                    <p>Saia deste workshop com um plano concreto. O que você e sua equipe fazem nos próximos 5 dias
+                        úteis.</p>
                 </div>
                 <div class="day-list">
                     <div class="day-item">
                         <div class="day-marker">Segunda</div>
                         <div class="day-content">
                             <h4>Identifique 1 processo para melhorar</h4>
-                            <p>Escolha uma rotina da sua área que consome mais de 2 horas por semana e tem etapas repetitivas e previsíveis. Escreva as etapas no papel — sem olhar para ferramentas ainda.</p>
+                            <p>Escolha uma rotina da sua área que consome mais de 2 horas por semana e tem etapas
+                                repetitivas e previsíveis. Escreva as etapas no papel — sem olhar para ferramentas
+                                ainda.</p>
                         </div>
                     </div>
                     <div class="day-item">
                         <div class="day-marker">Terça</div>
                         <div class="day-content">
                             <h4>Monte o briefing para esse processo</h4>
-                            <p>Use o modelo dos 4 blocos (Papel + Contexto + Tarefa + Formato). Escreva o prompt e teste em 2 ferramentas diferentes. Compare os resultados.</p>
+                            <p>Use o modelo dos 4 blocos (Papel + Contexto + Tarefa + Formato). Escreva o prompt e teste
+                                em 2 ferramentas diferentes. Compare os resultados.</p>
                         </div>
                     </div>
                     <div class="day-item">
                         <div class="day-marker">Quarta</div>
                         <div class="day-content">
                             <h4>Refine o prompt com o time</h4>
-                            <p>Compartilhe o melhor resultado com 2 colegas. Peça para testarem o mesmo prompt e observem se o resultado é consistente. Ajuste onde o output variou demais.</p>
+                            <p>Compartilhe o melhor resultado com 2 colegas. Peça para testarem o mesmo prompt e
+                                observem se o resultado é consistente. Ajuste onde o output variou demais.</p>
                         </div>
                     </div>
                     <div class="day-item">
                         <div class="day-marker">Quinta</div>
                         <div class="day-content">
                             <h4>Documente o prompt aprovado</h4>
-                            <p>Registre o prompt final na biblioteca do time — uma pasta compartilhada no SharePoint ou Google Drive. Adicione: nome da tarefa, ferramenta recomendada e exemplo de output esperado.</p>
+                            <p>Registre o prompt final na biblioteca do time — uma pasta compartilhada no SharePoint ou
+                                Google Drive. Adicione: nome da tarefa, ferramenta recomendada e exemplo de output
+                                esperado.</p>
                         </div>
                     </div>
                     <div class="day-item" style="border-left:3px solid var(--brb-blue-light);">
                         <div class="day-marker">Sexta</div>
                         <div class="day-content">
                             <h4>Avalie o nível de maturidade do processo</h4>
-                            <p>Com a régua de 4 níveis: o processo está no Nível 1 (manual) ou já pode avançar para Nível 2 (biblioteca de prompts)? Defina a próxima ação e quem é o responsável.</p>
+                            <p>Com a régua de 4 níveis: o processo está no Nível 1 (manual) ou já pode avançar para
+                                Nível 2 (biblioteca de prompts)? Defina a próxima ação e quem é o responsável.</p>
                         </div>
                     </div>
                 </div>
@@ -992,4 +1643,5 @@ Entregue os 3 itens separadamente, com a fórmula pronta para colar na planilha.
 
     <script src="script.js"></script>
 </body>
+
 </html>
